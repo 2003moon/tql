@@ -5,6 +5,7 @@ package tqllang;
  */
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 
 public class TQLScanner
@@ -20,14 +21,27 @@ public class TQLScanner
     private boolean firstRun;
     private int currentLine;
     private int currentCharPosition;
+    private HashSet<Character> otherCharacters;
 
     public TQLScanner(String query)
     {
         reader = new TQLReader(query);
         identifierString = "";
 
+        otherCharacters = new HashSet<Character>();
+        otherCharacters.add('=');
+        otherCharacters.add('*');
+        otherCharacters.add(',');
+        otherCharacters.add(';');
+        otherCharacters.add('(');
+        otherCharacters.add(')');
+
         // pre-populate keyword table with keywords
         keywordTable = new HashMap<>(15);
+        keywordTable.put("define", Token.defineToken);
+        keywordTable.put("sensorcollection", Token.sensorToken);
+        keywordTable.put("observationcollection", Token.observationToken);
+        keywordTable.put("sensors_to_observations", Token.sensorToObsToken);
         keywordTable.put("select", Token.selectToken);
         keywordTable.put("as", Token.asToken);
         keywordTable.put("from", Token.fromToken);
@@ -60,7 +74,7 @@ public class TQLScanner
         }
     }
 
-    public Token getToken()
+    public Token getToken(boolean whereClause)
     {
         eatSpaces();
 
@@ -88,12 +102,17 @@ public class TQLScanner
             case '*':
                 // eat "*"
                 next();
+                identifier = "*";
                 return Token.timesToken;
-            case '/':
+            /*case '/':
                 // eat "/"
                 next();
                 if(inputChar != '/')
+                {
+                    identifier = "/";
                     return Token.divToken;
+                }
+
 
                 // it's a comment and inputChar == '/', the 2nd one
                 skipCharacters();
@@ -106,14 +125,17 @@ public class TQLScanner
             case '+':
                 // eat "+"
                 next();
+                identifier = "+";
                 return Token.plusToken;
             case '-':       // TODO: negative numbers
                 // eat "-"
                 next();
-                return Token. minusToken;
+                identifier = "-";
+                return Token. minusToken;*/
             case '=':
                 // eat "="
                 next();
+                identifier = "=";
                 return Token.eqlToken;
                 /*
                 if(inputChar == '=')
@@ -138,10 +160,11 @@ public class TQLScanner
                 {
                     error("Error with \"!\"");
                     return Token.errorToken;
-                }*/
+                }
             case '<':
                 // eat "<"
                 next();
+                identifier = "<";
                 if (inputChar == '=')
                 {
                     // eat "="
@@ -154,6 +177,7 @@ public class TQLScanner
                 }
             case '>':
                 // eat ">"
+                identifier = ">";
                 next();
                 if (inputChar == '=')
                 {
@@ -165,13 +189,14 @@ public class TQLScanner
                 {
                     return Token.gtrToken;
                 }
-            /*
+
             case '.':
                 next();
                 return Token.periodToken;*/
             case ',':
                 // eat ","
                 next();
+                identifier = ",";
                 return Token.commaToken;
             /*case '[':
                 next();
@@ -182,21 +207,45 @@ public class TQLScanner
             case ')':
                 // eat ")"
                 next();
+                identifier = ")";
                 return Token.closeparenToken;
             case '(':
                 // eat "("
                 next();
+                identifier = "(";
                 return Token.openparenToken;
-            /*case ';':
+            case ';':
                 next();
+                identifier = ";";
                 return Token.semiToken;
-            case '}':
+            /*case '}':
                 next();
                 return Token.endToken;
             case '{':
                 next();
                 return Token.beginToken;*/
             default:
+
+                if(Character.isLetter(inputChar))
+                {
+                    while (Character.isLetterOrDigit(inputChar) || inputChar == '.' || inputChar == '_')
+                    {
+                        identifierString = identifierString+inputChar;
+                        next();
+                    }
+
+                    identifier = identifierString;
+
+                    if(keywordTable.containsKey(identifierString.toLowerCase()))
+                    {
+                        return keywordTable.get(identifierString.toLowerCase());
+                    }
+                    else
+                    {
+                        return Token.identToken;
+                    }
+
+                }
 
                 // number token, how about negative numbers
                 /*if (Character.isDigit(inputChar))
@@ -220,7 +269,7 @@ public class TQLScanner
                     }
                 }*/
                 // identifier token
-                if(Character.isLetter(inputChar))
+                /*if(Character.isLetter(inputChar))
                 {
                     while (Character.isLetterOrDigit(inputChar) || inputChar == '.')
                     {
@@ -259,8 +308,14 @@ public class TQLScanner
                 }
 
                 // if no token is recognized at all
+                return Token.errorToken;*/
                 return Token.errorToken;
         }
+    }
+
+    public boolean isKeyword(String name)
+    {
+        return keywordTable.containsKey(name);
     }
 
     private void eatSpaces()

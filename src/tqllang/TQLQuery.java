@@ -1,5 +1,6 @@
 package tqllang;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,9 +10,18 @@ import java.util.List;
 public class TQLQuery
 {
     public String command;
-    public List<String> fromCollections;
 
+    public List<CollectionVariable> fromCollections;
+    public List<String> attributesList;
+    public String where;
 
+    public TQLQuery()
+    {
+        command = "";
+        fromCollections = new ArrayList<>();
+        attributesList = new ArrayList<>();
+        where = "";
+    }
 }
 
 

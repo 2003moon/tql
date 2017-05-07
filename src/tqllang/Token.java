@@ -11,6 +11,10 @@ public enum Token
     asToken,
     numberToken,
     identToken,
+    defineToken,
+    sensorToken,
+    observationToken,
+    sensorToObsToken,
 
     // arithmetic operators
     timesToken,
