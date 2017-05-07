@@ -3,6 +3,7 @@ package tqllang;
 /**
  * Created by Yas.
  */
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -64,7 +65,16 @@ public class TQLScanner
                 return;
         }
 
-        inputChar = reader.getCharacter();
+        try
+        {
+            inputChar = reader.getCharacter();
+        }
+        catch(IOException e)
+        {
+            inputChar = 0x00;
+            return;
+        }
+
         currentCharPosition += 1;
 
         if(inputChar == '\n')
@@ -76,7 +86,9 @@ public class TQLScanner
 
     public Token getToken(boolean whereClause)
     {
-        eatSpaces();
+        // don't eat spaces if you are reading for where clause
+        if(!whereClause)
+            eatSpaces();
 
         // error character, end of file characters
         if (inputChar == 0x00)
@@ -86,11 +98,11 @@ public class TQLScanner
         }
 
         // skip the characters if it's a comment
-        while(inputChar == '#')
+        /*while(inputChar == '#')
         {
             skipCharacters();
             eatSpaces();
-        }
+        }*/
 
         identifierString = "";
 
@@ -244,7 +256,13 @@ public class TQLScanner
                     {
                         return Token.identToken;
                     }
+                }
 
+                if(whereClause)
+                {
+                    identifier = ""+inputChar;
+                    next();
+                    return Token.identToken;
                 }
 
                 // number token, how about negative numbers
@@ -340,15 +358,7 @@ public class TQLScanner
 
     private void error(String errorMsg)
     {
-        // TODO: handle exception
         inputChar = 0x00;
         System.out.println(errorMsg);
-    }
-
-    private void error(Exception e)
-    {
-        inputChar = 0x00;
-        System.out.println(e.getMessage());
-        e.printStackTrace();
     }
 }

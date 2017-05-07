@@ -1,27 +1,20 @@
 package tqllang;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 /**
- * Created by Yas.
+ * Yas
  */
-
 public class TQLQuery
 {
-    public String command;
-
-    public List<CollectionVariable> fromCollections;
-    public List<String> attributesList;
-    public String where;
+    public HashMap<String,SensorCollectionVariable> sensorVariables;
+    public HashMap<String,ObservationCollectionVariable> observationVariables;
+    public SQLQuery finalQuery;
 
     public TQLQuery()
     {
-        command = "";
-        fromCollections = new ArrayList<>();
-        attributesList = new ArrayList<>();
-        where = "";
+        sensorVariables = new HashMap<>();
+        observationVariables = new HashMap<>();
+        finalQuery = new SQLQuery();
     }
 }
-
-

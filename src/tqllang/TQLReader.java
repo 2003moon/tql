@@ -13,27 +13,9 @@ public class TQLReader
     {
         reader = new StringReader(query);
     }
-    public char getCharacter()
-    {
-        try
-        {
-            return (char) reader.read();
-        }
-        catch(IOException e)
-        {
-            // TODO: should you close the reader? if yes, TQLScanner might need to handle some exception
-            error(e);
-            return 0x00;
-        }
-    }
 
-    public void error(Exception e)
+    public char getCharacter() throws IOException
     {
-        if(e instanceof IOException)
-        {
-            System.out.println("Error encountered while reading.");
-            System.out.println(e.getMessage());
-//            System.exit(1);
-        }
+        return (char) reader.read();
     }
 }

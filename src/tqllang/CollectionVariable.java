@@ -8,6 +8,7 @@ public class CollectionVariable
 {
     public String name;
     public String alias;
+    public boolean isAssigned;
 
     public CollectionVariable(String name)
     {

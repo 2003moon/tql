@@ -2,7 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5bf30b6b-7e9e-4ea3-8ab6-4051e57f2367" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tqllang/MissingSemiColon.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tqllang/SQLQuery.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tqllang/TQLException.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tqllang/UnexpectedStatement.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/tql/tqllang/ObservationCollectionVariable.class" afterPath="$PROJECT_DIR$/out/production/tql/tqllang/ObservationCollectionVariable.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/tql/tqllang/TQLParser.class" afterPath="$PROJECT_DIR$/out/production/tql/tqllang/TQLParser.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/tql/tqllang/TQLScanner.class" afterPath="$PROJECT_DIR$/out/production/tql/tqllang/TQLScanner.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/example" afterPath="$PROJECT_DIR$/example" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tqllang/CollectionVariable.java" afterPath="$PROJECT_DIR$/src/tqllang/CollectionVariable.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tqllang/Main.java" afterPath="$PROJECT_DIR$/src/tqllang/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tqllang/ObservationCollectionVariable.java" afterPath="$PROJECT_DIR$/src/tqllang/ObservationCollectionVariable.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tqllang/SensorCollectionVariable.java" afterPath="$PROJECT_DIR$/src/tqllang/SensorCollectionVariable.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tqllang/TQLParser.java" afterPath="$PROJECT_DIR$/src/tqllang/TQLParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tqllang/TQLQuery.java" afterPath="$PROJECT_DIR$/src/tqllang/TQLQuery.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tqllang/TQLReader.java" afterPath="$PROJECT_DIR$/src/tqllang/TQLReader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tqllang/TQLScanner.java" afterPath="$PROJECT_DIR$/src/tqllang/TQLScanner.java" />
     </list>
     <ignored path="tql.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -27,8 +44,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tqllang/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="62" lean-forward="false" selection-start-line="15" selection-start-column="62" selection-end-line="15" selection-end-column="62" />
+            <state relative-caret-position="15">
+              <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -36,11 +53,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TQLReader.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/tqllang/TQLReader.java">
+      <file leaf-file-name="CollectionVariable.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/tqllang/CollectionVariable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+            <state relative-caret-position="150">
+              <caret line="10" column="30" lean-forward="false" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -49,28 +66,40 @@
       <file leaf-file-name="TQLParser.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tqllang/TQLParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="310" column="27" lean-forward="false" selection-start-line="310" selection-start-column="27" selection-end-line="310" selection-end-column="27" />
+            <state relative-caret-position="320">
+              <caret line="359" column="9" lean-forward="true" selection-start-line="359" selection-start-column="9" selection-end-line="359" selection-end-column="9" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="method#parse#0;class#TQLParser#0" expanded="false" />
+                <element signature="method#define#0;class#TQLParser#0" expanded="false" />
                 <element signature="method#assign#0;class#TQLParser#0" expanded="false" />
+                <element signature="method#selectStatement#0;class#TQLParser#0" expanded="false" />
+                <element signature="method#select#0;class#TQLParser#0" expanded="false" />
                 <element signature="method#from#0;class#TQLParser#0" expanded="false" />
-                <element signature="method#addSensor#0;class#TQLParser#0" expanded="false" />
-                <element signature="method#addObservation#0;class#TQLParser#0" expanded="false" />
-                <element signature="method#addTableToQuery#0;class#TQLParser#0" expanded="false" />
+                <element signature="method#where#0;class#TQLParser#0" expanded="false" />
+                <element signature="method#addCollectionVariable#0;class#TQLParser#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TQLScanner.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/tqllang/TQLScanner.java">
+      <file leaf-file-name="TQLReader.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/tqllang/TQLReader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="430">
-              <caret line="247" column="17" lean-forward="false" selection-start-line="247" selection-start-column="17" selection-end-line="247" selection-end-column="17" />
+            <state relative-caret-position="225">
+              <caret line="18" column="36" lean-forward="false" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TQLException.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/tqllang/TQLException.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" column="23" lean-forward="false" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
               <folding>
-                <element signature="e#9924#9925#0" expanded="true" />
-                <element signature="e#9977#9978#0" expanded="true" />
+                <element signature="e#123#124#0" expanded="true" />
+                <element signature="e#153#154#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -79,11 +108,9 @@
       <file leaf-file-name="TQLQuery.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tqllang/TQLQuery.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" column="19" lean-forward="false" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="19" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="255">
+              <caret line="17" column="36" lean-forward="false" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -111,12 +138,17 @@
         <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/tqllang/Token.java" />
         <option value="$PROJECT_DIR$/src/tqllang/Collection.java" />
-        <option value="$PROJECT_DIR$/src/tqllang/CollectionVariable.java" />
-        <option value="$PROJECT_DIR$/src/tqllang/TQLQuery.java" />
         <option value="$PROJECT_DIR$/src/tqllang/SensorCollectionVariable.java" />
         <option value="$PROJECT_DIR$/src/tqllang/ObservationCollectionVariable.java" />
+        <option value="$PROJECT_DIR$/src/tqllang/SQLQuery.java" />
+        <option value="$PROJECT_DIR$/src/tqllang/TQLQuery.java" />
+        <option value="$PROJECT_DIR$/src/tqllang/UnexpectedStatement.java" />
+        <option value="$PROJECT_DIR$/src/tqllang/MissingSemiColon.java" />
+        <option value="$PROJECT_DIR$/src/tqllang/TQLException.java" />
         <option value="$PROJECT_DIR$/src/tqllang/Main.java" />
+        <option value="$PROJECT_DIR$/src/tqllang/TQLReader.java" />
         <option value="$PROJECT_DIR$/src/tqllang/TQLScanner.java" />
+        <option value="$PROJECT_DIR$/src/tqllang/CollectionVariable.java" />
         <option value="$PROJECT_DIR$/src/tqllang/TQLParser.java" />
       </list>
     </option>
@@ -650,7 +682,7 @@
       <option name="presentableId" value="Default" />
       <updated>1492995919062</updated>
       <workItem from="1492995920814" duration="145000" />
-      <workItem from="1493886992165" duration="17870000" />
+      <workItem from="1493886992165" duration="27285000" />
     </task>
     <task id="LOCAL-00001" summary="Version 1">
       <created>1494133340706</created>
@@ -677,7 +709,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18015000" />
+    <option name="totallyTimeSpent" value="27430000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="82" y="23" width="1061" height="730" extended-state="0" />
@@ -726,39 +758,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/tqllang/TQLParser.java</url>
-          <line>69</line>
-          <properties />
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/tqllang/Main.java</url>
-          <line>26</line>
-          <properties />
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/tqllang/TQLParser.java</url>
-          <line>309</line>
-          <properties />
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/tqllang/TQLParser.java</url>
-          <line>35</line>
-          <properties />
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/tqllang/TQLParser.java</url>
-          <line>21</line>
-          <properties />
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="8" />
+      <option name="time" value="15" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -795,19 +795,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tqllang/Collection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/example">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tqllang/ObservationCollectionVariable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="51" lean-forward="true" selection-start-line="7" selection-start-column="51" selection-end-line="7" selection-end-column="51" />
+          <folding>
+            <element signature="e#216#217#0" expanded="true" />
+            <element signature="e#243#244#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -822,73 +825,116 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tqllang/CollectionVariable.java">
+    <entry file="file://$PROJECT_DIR$/src/tqllang/Collection.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="19" column="27" lean-forward="false" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
+        <state relative-caret-position="105">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tqllang/ObservationCollectionVariable.java">
+    <entry file="file://$PROJECT_DIR$/src/tqllang/SQLQuery.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="20" lean-forward="false" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
+        <state relative-caret-position="210">
+          <caret line="14" column="39" lean-forward="true" selection-start-line="14" selection-start-column="39" selection-end-line="14" selection-end-column="39" />
           <folding>
-            <element signature="e#218#219#0" expanded="true" />
-            <element signature="e#245#246#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tqllang/TQLQuery.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="19" lean-forward="false" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="19" />
+        <state relative-caret-position="255">
+          <caret line="17" column="36" lean-forward="false" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tqllang/UnexpectedStatement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="23" lean-forward="false" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#137#138#0" expanded="true" />
+            <element signature="e#167#168#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tqllang/MissingSemiColon.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="23" lean-forward="false" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
+          <folding>
+            <element signature="e#131#132#0" expanded="true" />
+            <element signature="e#161#162#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tqllang/TQLException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="23" lean-forward="false" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
+          <folding>
+            <element signature="e#123#124#0" expanded="true" />
+            <element signature="e#153#154#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tqllang/TQLScanner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="359" column="5" lean-forward="false" selection-start-line="359" selection-start-column="5" selection-end-line="359" selection-end-column="5" />
+          <folding>
+            <element signature="method#TQLScanner#0;class#TQLScanner#0" expanded="false" />
+            <element signature="method#next#0;class#TQLScanner#0" expanded="false" />
+            <element signature="method#getToken#0;class#TQLScanner#0" expanded="false" />
+            <element signature="method#eatSpaces#0;class#TQLScanner#0" expanded="false" />
+            <element signature="method#skipCharacters#0;class#TQLScanner#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tqllang/TQLReader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        <state relative-caret-position="225">
+          <caret line="18" column="36" lean-forward="false" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tqllang/TQLScanner.java">
+    <entry file="file://$PROJECT_DIR$/src/tqllang/CollectionVariable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="430">
-          <caret line="247" column="17" lean-forward="false" selection-start-line="247" selection-start-column="17" selection-end-line="247" selection-end-column="17" />
-          <folding>
-            <element signature="e#9924#9925#0" expanded="true" />
-            <element signature="e#9977#9978#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="150">
+          <caret line="10" column="30" lean-forward="false" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tqllang/TQLParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="310" column="27" lean-forward="false" selection-start-line="310" selection-start-column="27" selection-end-line="310" selection-end-column="27" />
+        <state relative-caret-position="320">
+          <caret line="359" column="9" lean-forward="true" selection-start-line="359" selection-start-column="9" selection-end-line="359" selection-end-column="9" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="method#parse#0;class#TQLParser#0" expanded="false" />
+            <element signature="method#define#0;class#TQLParser#0" expanded="false" />
             <element signature="method#assign#0;class#TQLParser#0" expanded="false" />
+            <element signature="method#selectStatement#0;class#TQLParser#0" expanded="false" />
+            <element signature="method#select#0;class#TQLParser#0" expanded="false" />
             <element signature="method#from#0;class#TQLParser#0" expanded="false" />
-            <element signature="method#addSensor#0;class#TQLParser#0" expanded="false" />
-            <element signature="method#addObservation#0;class#TQLParser#0" expanded="false" />
-            <element signature="method#addTableToQuery#0;class#TQLParser#0" expanded="false" />
+            <element signature="method#where#0;class#TQLParser#0" expanded="false" />
+            <element signature="method#addCollectionVariable#0;class#TQLParser#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tqllang/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="62" lean-forward="false" selection-start-line="15" selection-start-column="62" selection-end-line="15" selection-end-column="62" />
+        <state relative-caret-position="15">
+          <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

@@ -25,6 +25,15 @@ public class Main
         }
 
         TQLParser p = new TQLParser(query);
-        p.parse();
+
+        try
+        {
+            p.parse();
+        }
+        catch(TQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
+
     }
 }

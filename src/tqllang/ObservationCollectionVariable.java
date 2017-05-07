@@ -5,7 +5,7 @@ package tqllang;
  */
 public class ObservationCollectionVariable extends CollectionVariable
 {
-    public SensorCollectionVariable sensorCollection;
+    public SensorCollectionVariable sensorVariable;
 
     public ObservationCollectionVariable(String name)
     {

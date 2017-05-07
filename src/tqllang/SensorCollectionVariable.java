@@ -6,7 +6,7 @@ package tqllang;
 
 public class SensorCollectionVariable extends CollectionVariable
 {
-    public TQLQuery query;
+    public SQLQuery query;
 
     public SensorCollectionVariable(String name)
     {
