@@ -2,17 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5bf30b6b-7e9e-4ea3-8ab6-4051e57f2367" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tqllang/Collection.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tqllang/CollectionVariable.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tqllang/ObservationCollectionVariable.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tqllang/SensorCollectionVariable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/tql/tqllang/Main.class" afterPath="$PROJECT_DIR$/out/production/tql/tqllang/Main.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/tql/tqllang/TQLParser.class" afterPath="$PROJECT_DIR$/out/production/tql/tqllang/TQLParser.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/tql/tqllang/TQLQuery.class" afterPath="$PROJECT_DIR$/out/production/tql/tqllang/TQLQuery.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/tql/tqllang/TQLScanner.class" afterPath="$PROJECT_DIR$/out/production/tql/tqllang/TQLScanner.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/tql/tqllang/Token.class" afterPath="$PROJECT_DIR$/out/production/tql/tqllang/Token.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tqllang/Main.java" afterPath="$PROJECT_DIR$/src/tqllang/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tqllang/TQLParser.java" afterPath="$PROJECT_DIR$/src/tqllang/TQLParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tqllang/TQLQuery.java" afterPath="$PROJECT_DIR$/src/tqllang/TQLQuery.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tqllang/TQLScanner.java" afterPath="$PROJECT_DIR$/src/tqllang/TQLScanner.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tqllang/Token.java" afterPath="$PROJECT_DIR$/src/tqllang/Token.java" />
     </list>
     <ignored path="tql.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -660,12 +655,20 @@
       <option name="presentableId" value="Default" />
       <updated>1492995919062</updated>
       <workItem from="1492995920814" duration="145000" />
-      <workItem from="1493886992165" duration="17594000" />
+      <workItem from="1493886992165" duration="17731000" />
     </task>
+    <task id="LOCAL-00001" summary="Version 1">
+      <created>1494133340706</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1494133340706</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17739000" />
+    <option name="totallyTimeSpent" value="17876000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="82" y="23" width="1061" height="730" extended-state="0" />
@@ -707,6 +710,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Version 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Version 1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
