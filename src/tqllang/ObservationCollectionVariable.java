@@ -9,6 +9,6 @@ public class ObservationCollectionVariable extends CollectionVariable
 
     public ObservationCollectionVariable(String name)
     {
-        super(name);
+        super(name, CollectionType.observation);
     }
 }

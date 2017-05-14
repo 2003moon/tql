@@ -10,6 +10,6 @@ public class SensorCollectionVariable extends CollectionVariable
 
     public SensorCollectionVariable(String name)
     {
-        super(name);
+        super(name, CollectionType.sensor);
     }
 }

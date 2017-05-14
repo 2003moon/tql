@@ -368,7 +368,7 @@ public class TQLParser
         }
         else
         {
-            query.fromCollections.add(new CollectionVariable(collectionName, aliasName));
+            query.fromCollections.add(new CollectionVariable(collectionName, aliasName, CollectionType.table));
         }
     }
 }

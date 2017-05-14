@@ -240,7 +240,8 @@ public class TQLScanner
 
                 if(Character.isLetter(inputChar))
                 {
-                    while (Character.isLetterOrDigit(inputChar) || inputChar == '.' || inputChar == '_')
+                    // TODO: Think
+                    while (Character.isLetterOrDigit(inputChar) || inputChar == '.' || inputChar == '_' || inputChar == '*')
                     {
                         identifierString = identifierString+inputChar;
                         next();
