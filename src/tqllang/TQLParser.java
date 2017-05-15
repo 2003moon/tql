@@ -10,12 +10,31 @@ public class TQLParser
     public TQLScanner scanner;
     public Token token;
     public TQLQuery tqlQuery;
+    public HashMap<String, CollectionType> collectionTypeMapping;
 
     public TQLParser(String query)
     {
         scanner = new TQLScanner(query);
         token = scanner.getToken(false);
         tqlQuery = new TQLQuery();
+
+        collectionTypeMapping = new HashMap<>();
+        collectionTypeMapping.put("Group", CollectionType.group);
+        collectionTypeMapping.put("User", CollectionType.user);
+        collectionTypeMapping.put("Location", CollectionType.location);
+        collectionTypeMapping.put("Region", CollectionType.region);
+        collectionTypeMapping.put("InfrastructureType", CollectionType.infraType);
+        collectionTypeMapping.put("Infrastructure", CollectionType.infra);
+        collectionTypeMapping.put("PlatformType", CollectionType.platfromType);
+        collectionTypeMapping.put("Platform", CollectionType.platfrom);
+        collectionTypeMapping.put("SensorType", CollectionType.sensorType);
+        collectionTypeMapping.put("Sensor", CollectionType.sensor);
+        collectionTypeMapping.put("ObservationType", CollectionType.observationType);
+        collectionTypeMapping.put("Observation", CollectionType.observation);
+        collectionTypeMapping.put("SemanticObservationType", CollectionType.semanticObsType);
+        collectionTypeMapping.put("VirtualSensorType", CollectionType.virtualSensor);
+        collectionTypeMapping.put("VirtualSensor", CollectionType.virtualSensor);
+        collectionTypeMapping.put("SemanticObservation", CollectionType.semanticObservation);
     }
 
     public void eatToken(boolean whereClause)
@@ -344,7 +363,6 @@ public class TQLParser
         // do some logic
         String collectionName = scanner.identifier;
 
-        // get the type of the collection
         String aliasName = "";
 
         // eat the ident.
@@ -370,7 +388,9 @@ public class TQLParser
         }
         else
         {
-            query.fromCollections.add(new CollectionVariable(collectionName, aliasName, CollectionType.table));
+            // get the type of the collection
+            CollectionType collectionType = collectionTypeMapping.get(collectionName);
+            query.fromCollections.add(new CollectionVariable(collectionName, aliasName, collectionType));
         }
     }
 }
