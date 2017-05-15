@@ -16,6 +16,12 @@ public enum Token
     observationToken,
     sensorToObsToken,
 
+    andToken,
+    orToken,
+    inToken,
+    stringToken,
+    characterToken,
+
     // arithmetic operators
     timesToken,
     divToken,

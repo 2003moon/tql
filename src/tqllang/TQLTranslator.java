@@ -1,5 +1,8 @@
 package tqllang;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Yas.
  */
@@ -8,46 +11,112 @@ public class TQLTranslator
     public String translate(TQLQuery tqlQuery)
     {
         // start with the final query
-        String finalQuery = "SELECT ";
+        String allQuery = translateSQL(tqlQuery.finalQuery);
+
+        return allQuery;
+    }
+
+    public String translateSQL(SQLQuery sqlQuery)
+    {
+        String translatedQuery = "SELECT ";
+
+        // parse the "where" clause first
+        translateWhere(sqlQuery);
 
         //TODO: attributes
-        for(int i = 0; i < tqlQuery.finalQuery.attributesList.size(); i++)
+        for(int i = 0; i < sqlQuery.attributesList.size(); i++)
         {
             // if the last attribute, don't put a comma
-            if(i == tqlQuery.finalQuery.attributesList.size()-1)
+            if(i == sqlQuery.attributesList.size()-1)
             {
-                finalQuery += tqlQuery.finalQuery.attributesList.get(i);
+                translatedQuery += sqlQuery.attributesList.get(i);
             }
             else
             {
-                finalQuery += tqlQuery.finalQuery.attributesList.get(i)+",";
+                translatedQuery += sqlQuery.attributesList.get(i)+",";
             }
         }
 
 
-        finalQuery += " FROM ";
+        translatedQuery += " FROM ";
 
         // expanding the tables in the "from"
-        for(CollectionVariable collection : tqlQuery.finalQuery.fromCollections)
+        for(CollectionVariable collection : sqlQuery.fromCollections)
         {
             if(collection.type == CollectionType.sensor)
             {
-                finalQuery += expandSensor((SensorCollectionVariable) collection);
+                translatedQuery += expandSensor((SensorCollectionVariable) collection);
             }
             else if(collection.type == CollectionType.observation)
             {
-                finalQuery += expandObservation((ObservationCollectionVariable) collection);
+                translatedQuery += expandObservation((ObservationCollectionVariable) collection);
             }
             else
             {
-                finalQuery += expandTable(collection);
+                translatedQuery += expandTable(collection);
             }
 
-            finalQuery += " AS "+ collection.alias;
+            translatedQuery += " AS "+ collection.alias;
         }
 
-        return finalQuery;
+        return translatedQuery;
     }
+
+    public void translateWhere(SQLQuery query)
+    {
+        // create where clause
+        WhereClause whereClause = new WhereClause();
+
+        List<String> joinConditions = new ArrayList<>();
+        String modifiedWhere = "";
+
+        WhereCondition whereCondition = new WhereCondition();
+
+        WhereScanner whereScanner = new WhereScanner(query.where);
+        Token token = whereScanner.getToken();
+
+        while(token != Token.endOfFileToken)
+        {
+            // if token is identifier, then figure out the join (if you actually need a join)
+            if(token == Token.identToken)
+            {
+                whereCondition = figureOutJoins(query, whereScanner.identifier);
+
+                joinConditions.add(whereCondition.joinCondition);
+                modifiedWhere += whereCondition.originalCondition;
+            }
+            else
+            {
+                modifiedWhere += whereScanner.identifier;
+            }
+
+            token = whereScanner.getToken();
+        }
+
+
+
+    }
+
+    public WhereCondition figureOutJoins(SQLQuery query, String attribute)
+    {
+        WhereCondition whereCondition = new WhereCondition();
+
+        String[] array = attribute.split(".");
+
+        String previous = array[0];
+
+        // TODO: should you check if the table is not mentioned in the from clause and add it?
+
+        String current = "";
+
+        for(int i = 1; i < array.length; i++)
+        {
+            current = array[i];
+        }
+
+        return whereCondition;
+    }
+
 
     public String expandSensor(SensorCollectionVariable sensorVariable)
     {

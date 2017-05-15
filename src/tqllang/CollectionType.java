@@ -7,5 +7,19 @@ public enum CollectionType
 {
     table,
     sensor,
-    observation
+    observation,
+    group,
+    user,
+    location,
+    region,
+    infraType,
+    infra,
+    platfromType,
+    platfrom,
+    sensorType,
+    observationType,
+    semanticObsType,
+    virtualSensorType,
+    virtualSensor,
+    semanticObservation,
 }

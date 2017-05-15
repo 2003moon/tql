@@ -343,12 +343,14 @@ public class TQLParser
     {
         // do some logic
         String collectionName = scanner.identifier;
+
+        // get the type of the collection
         String aliasName = "";
 
         // eat the ident.
         eatToken(false);
 
-        // check if it has an alias
+        // TODO: check if it has an alias
         if(token == Token.identToken)
         {
             aliasName = scanner.identifier;

@@ -116,106 +116,16 @@ public class TQLScanner
                 next();
                 identifier = "*";
                 return Token.timesToken;
-            /*case '/':
-                // eat "/"
-                next();
-                if(inputChar != '/')
-                {
-                    identifier = "/";
-                    return Token.divToken;
-                }
-
-
-                // it's a comment and inputChar == '/', the 2nd one
-                skipCharacters();
-                eatSpaces();
-
-                // inputChar is now at the beginning of the next new line
-                // call get token to see what token it is
-                return getToken();
-
-            case '+':
-                // eat "+"
-                next();
-                identifier = "+";
-                return Token.plusToken;
-            case '-':       // TODO: negative numbers
-                // eat "-"
-                next();
-                identifier = "-";
-                return Token. minusToken;*/
             case '=':
                 // eat "="
                 next();
                 identifier = "=";
                 return Token.eqlToken;
-                /*
-                if(inputChar == '=')
-                {
-                    next();
-                    return Token.eqlToken;
-                }
-                else
-                {
-                    error("Error with \"=\"");
-                    return Token.errorToken;
-                }*/
-            /*
-            case '!':
-                next();
-                if (inputChar == '=')
-                {
-                    next();
-                    return Token.neqToken;
-                }
-                else
-                {
-                    error("Error with \"!\"");
-                    return Token.errorToken;
-                }
-            case '<':
-                // eat "<"
-                next();
-                identifier = "<";
-                if (inputChar == '=')
-                {
-                    // eat "="
-                    next();
-                    return Token.leqToken;
-                }
-                else
-                {
-                    return Token.lssToken;
-                }
-            case '>':
-                // eat ">"
-                identifier = ">";
-                next();
-                if (inputChar == '=')
-                {
-                    // eat "="
-                    next();
-                    return Token.geqToken;
-                }
-                else
-                {
-                    return Token.gtrToken;
-                }
-
-            case '.':
-                next();
-                return Token.periodToken;*/
             case ',':
                 // eat ","
                 next();
                 identifier = ",";
                 return Token.commaToken;
-            /*case '[':
-                next();
-                return Token.openbracketToken;
-            case ']':
-                next();
-                return Token.closebracketToken;*/
             case ')':
                 // eat ")"
                 next();
@@ -230,12 +140,6 @@ public class TQLScanner
                 next();
                 identifier = ";";
                 return Token.semiToken;
-            /*case '}':
-                next();
-                return Token.endToken;
-            case '{':
-                next();
-                return Token.beginToken;*/
             default:
 
                 if(Character.isLetter(inputChar))
@@ -266,68 +170,6 @@ public class TQLScanner
                     return Token.identToken;
                 }
 
-                // number token, how about negative numbers
-                /*if (Character.isDigit(inputChar))
-                {
-                    while(Character.isDigit(inputChar))
-                    {
-                        identifierString = identifierString+inputChar;
-                        next();
-                    }
-
-                    // TODO: characters allowed after a number is space and ']'
-                    if(inputChar >= (char)0)
-                    {
-                        number = Integer.parseInt(identifierString);
-                        return Token.numberToken;
-                    }
-                    else
-                    {
-                        error("Error after reading a number");
-                        return Token.errorToken;
-                    }
-                }*/
-                // identifier token
-                /*if(Character.isLetter(inputChar))
-                {
-                    while (Character.isLetterOrDigit(inputChar) || inputChar == '.')
-                    {
-                        identifierString = identifierString+inputChar;
-                        next();
-                    }
-
-                    // what are the characters allowed after a variable
-                    if(inputChar >= (char)0)
-                    {
-                        // TODO: handle keyword
-                        if(keywordTable.containsKey(identifierString.toLowerCase()))
-                        {
-                            identifier = identifierString;
-                            return keywordTable.get(identifierString.toLowerCase());
-                        }
-                        else
-                        {
-                            // TODO:
-                            id = identifierTable.indexOf(identifierString);
-                            if( id == -1)
-                            {
-                                identifierTable.add(identifierString);
-                                id = identifierTable.size()-1;
-                            }
-
-                            identifier = identifierString;
-                            return Token.identToken;
-                        }
-                    }
-                    else
-                    {
-                        error("Error after reading a variable");
-                        return Token.errorToken;
-                    }
-                }
-
-                // if no token is recognized at all
-                return Token.errorToken;*/
                 return Token.errorToken;
         }
     }
