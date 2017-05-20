@@ -1,27 +1,22 @@
 package tqllang;
 
 /**
- * Yas
+ * Created Yas
  */
-
-public class CollectionVariable
+public class CollectionVariable extends Collection
 {
-    public String name;
-    public String alias;
     public boolean isAssigned;
-    public CollectionType type;
 
     public CollectionVariable(String name, CollectionType type)
     {
-        this.name = name;
-        this.type = type;
+        super(name, type);
     }
 
-    public CollectionVariable(String name, String alias, CollectionType type)
+    public Collection createCollection()
     {
-        this.name = name;
-        this.alias = alias;
-        this.type = type;
-    }
+        CollectionVariable collection = new CollectionVariable(this.name,this.type);
+        collection.isAssigned = this.isAssigned;
 
+        return collection;
+    }
 }

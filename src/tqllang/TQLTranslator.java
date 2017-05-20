@@ -1,27 +1,70 @@
 package tqllang;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * Created by Yas.
  */
 public class TQLTranslator
 {
-    public String translate(TQLQuery tqlQuery)
-    {
-        // start with the final query
-        String allQuery = translateSQL(tqlQuery.finalQuery);
+    public LinkedHashMap<String,String> translatedQueries;
 
-        return allQuery;
+    public TQLTranslator()
+    {
+        translatedQueries = new LinkedHashMap<>();
     }
 
-    public String translateSQL(SQLQuery sqlQuery)
+    public String translate(TQLQuery tqlQuery) throws TQLException
     {
+        // translate each collection variables
+        for(CollectionVariable collectionVariable : tqlQuery.collectionVariables.values())
+        {
+            translatedQueries.put(collectionVariable.name, translateCollection(collectionVariable));
+        }
+
+        String finalSQL = translateSQL(tqlQuery.finalQuery);
+
+        return finalSQL;
+    }
+
+    public String translateCollection(CollectionVariable collectionVariable) throws TQLException
+    {
+        // sensor variable
+        if(collectionVariable.type == CollectionType.sensorVariable)
+        {
+            return translateSQL(((SensorCollectionVariable)collectionVariable).query);
+        }
+        // observation variable
+        else
+        {
+            ObservationCollectionVariable observationVariable = (ObservationCollectionVariable) collectionVariable;
+
+            // get the SQL of the sensor. It must have been already translated and put in the dictionary
+            // TODO: do you need to check if not there?
+            String sensorSQL = translatedQueries.get(observationVariable.sensorVariable.name);
+
+            // form the SQL of the observation
+            String observationQuery = "SELECT "+observationVariable.name+".* ";
+
+            observationQuery += "FROM Observation AS "+observationVariable.name+ " JOIN ( ";
+            observationQuery += sensorSQL + " ) AS "+observationVariable.sensorVariable.name;
+            observationQuery += " ON ("+observationVariable.name+".sen_id = "+observationVariable.sensorVariable.name+".id)";
+
+            return observationQuery;
+        }
+    }
+
+    public String translateSQL(SQLQuery sqlQuery) throws TQLException
+    {
+        // Map entry for each collection in the "from" that contains the join tables to be done
+        HashMap<String,JoinTables> collectionsJoinMap = new HashMap<>();
+
         String translatedQuery = "SELECT ";
 
-        // parse the "where" clause first
-        translateWhere(sqlQuery);
+        // parse the "where" clause first.
+        // this method will add tables to the "fromCollection" if necessary
+        translateWhere(sqlQuery, collectionsJoinMap);
 
         //TODO: attributes
         for(int i = 0; i < sqlQuery.attributesList.size(); i++)
@@ -40,142 +83,149 @@ public class TQLTranslator
 
         translatedQuery += " FROM ";
 
+        // "fromCollection" might have been modified by "translateWhere" method
+        // (the tables required for the join to solve the "." issue
         // expanding the tables in the "from"
-        for(CollectionVariable collection : sqlQuery.fromCollections)
+        int i = 0;
+        for(Collection collection : sqlQuery.fromCollections)
         {
-            if(collection.type == CollectionType.sensor)
+            if(collection.type == CollectionType.sensorVariable || collection.type == CollectionType.observationVariable)
             {
-                translatedQuery += expandSensor((SensorCollectionVariable) collection);
-            }
-            else if(collection.type == CollectionType.observation)
-            {
-                translatedQuery += expandObservation((ObservationCollectionVariable) collection);
+                // sensor and observation variables must have already been translated
+                // TODO: do you need to check if not??
+                translatedQuery += "( "+translatedQueries.get(collection.name)+" )";
             }
             else
             {
-                translatedQuery += expandTable(collection);
+                translatedQuery += MySQLTableMapping.getMySQLNameForType(collection.type);
             }
 
+            // TODO: parser should enforce the alias use in the TQL query
             translatedQuery += " AS "+ collection.alias;
+
+            // check for joins
+            if(collectionsJoinMap.containsKey(collection.alias))
+            {
+                for(JoinTable joinTable : collectionsJoinMap.get(collection.alias).joinTables)
+                {
+                    translatedQuery += " INNER JOIN "+joinTable.table+" AS "+joinTable.alias+" USING ("+joinTable.column+")";
+                }
+            }
+
+
+            if(i < sqlQuery.fromCollections.size()-1)
+                translatedQuery += " , ";
+
+            i++;
         }
 
         return translatedQuery;
     }
 
-    public void translateWhere(SQLQuery query)
+    public String translateWhere(SQLQuery query, HashMap<String, JoinTables> collectionsJoinMap) throws TQLException
     {
-        // create where clause
-        WhereClause whereClause = new WhereClause();
-
-        List<String> joinConditions = new ArrayList<>();
-        String modifiedWhere = "";
-
-        WhereCondition whereCondition = new WhereCondition();
-
-        WhereScanner whereScanner = new WhereScanner(query.where);
-        Token token = whereScanner.getToken();
-
-        while(token != Token.endOfFileToken)
+        if(query.where != null && !query.where.isEmpty())
         {
-            // if token is identifier, then figure out the join (if you actually need a join)
-            if(token == Token.identToken)
-            {
-                whereCondition = figureOutJoins(query, whereScanner.identifier);
+            String modifiedWhere = "";
 
-                joinConditions.add(whereCondition.joinCondition);
-                modifiedWhere += whereCondition.originalCondition;
-            }
-            else
+            WhereScanner whereScanner = new WhereScanner(query.where);
+            Token token = whereScanner.getToken();
+
+            while(token != Token.endOfFileToken)
             {
-                modifiedWhere += whereScanner.identifier;
+                // if token is identifier, then figure out the join (if you actually need a join)
+                if(token == Token.identToken)
+                {
+                    modifiedWhere += figureOutJoins(query, collectionsJoinMap, whereScanner.identifier);
+                }
+                else
+                {
+                    modifiedWhere += whereScanner.identifier;
+                }
+
+                token = whereScanner.getToken();
             }
 
-            token = whereScanner.getToken();
+            return modifiedWhere;
         }
-
-
-
+        else
+        {
+            return "";
+        }
     }
 
-    public WhereCondition figureOutJoins(SQLQuery query, String attribute)
+    public String figureOutJoins(SQLQuery query, HashMap<String, JoinTables> collectionsJoinMap, String attribute) throws TQLException
     {
-        WhereCondition whereCondition = new WhereCondition();
-
+        // there must always be at least two things ___.___
         String[] array = attribute.split(".");
 
-        String previous = array[0];
+        // first one must always be alias
+        CollectionType firstCollectionType = CollectionType.noType;
+
+        // find it in the from list and identify its type
+        for(Collection collection : query.fromCollections)
+        {
+            if(collection.alias.equals(array[0]))
+            {
+                firstCollectionType = collection.type;
+                break;
+            }
+        }
+
+        // TODO: write something useful
+        if(firstCollectionType == CollectionType.noType)
+            throw new TQLException("SOME ERROR IN WHERE CLAUSE!!!");
+
+        String firstCollectionName = CollectionTypeMapping.getNameOf(firstCollectionType);
+        String firstCollectionAlias = array[0];
 
         // TODO: should you check if the table is not mentioned in the from clause and add it?
 
-        String current = "";
+        Relationship relationship;
+        String qualifiedName = array[0];
 
-        for(int i = 1; i < array.length; i++)
+        for(int i = 0; i < array.length-1; i++)
         {
-            current = array[i];
-        }
-
-        return whereCondition;
-    }
-
-
-    public String expandSensor(SensorCollectionVariable sensorVariable)
-    {
-        String sensorQuery = "SELECT ";
-
-        // TODO: put in the attributes list
-        for(int i = 0; i < sensorVariable.query.attributesList.size(); i++)
-        {
-            // if the last attribute, don't put a comma
-            if(i == sensorVariable.query.attributesList.size()-1)
+            // the first one and last one need to be dealt with differently
+            if(i == 0)
             {
-                sensorQuery += sensorVariable.query.attributesList.get(i);
+                relationship = getRelationship(firstCollectionName,array[1]);
             }
             else
             {
-                sensorQuery += sensorVariable.query.attributesList.get(i)+",";
+                relationship = getRelationship(array[i],array[i+1]);
             }
+
+            if(relationship.type == RelationshipType.join)
+            {
+                qualifiedName += "_"+array[i+1];
+
+                if(!collectionsJoinMap.containsKey(firstCollectionAlias))
+                    collectionsJoinMap.put(firstCollectionAlias,new JoinTables());
+
+                collectionsJoinMap.get(firstCollectionAlias).addJoinTable(relationship.tableName,qualifiedName,relationship.column);
+            }
+            else if(relationship.type == RelationshipType.attribute)
+            {
+                qualifiedName += "."+array[i+1];
+            }
+            else if(relationship.type == RelationshipType.json)
+            {
+                // TODO: check syntax for json
+            }
+
         }
 
-        sensorQuery += " FROM ";
-
-        for(CollectionVariable collection : sensorVariable.query.fromCollections)
-        {
-            if(collection.type == CollectionType.sensor)
-            {
-                sensorQuery += expandSensor((SensorCollectionVariable) collection);
-            }
-            else if(collection.type == CollectionType.observation)
-            {
-                sensorQuery += expandObservation((ObservationCollectionVariable) collection);
-            }
-            else
-            {
-                sensorQuery += expandTable(collection);
-            }
-        }
-
-
-        return sensorQuery;
+        return qualifiedName;
     }
 
-    public String expandObservation(ObservationCollectionVariable observationVariable)
+    public Relationship getRelationship(String s1, String s2)
     {
-        // get the SQL of the sensor
-        String sensorQuery = expandSensor(observationVariable.sensorVariable);
+        Relationship relationship = new Relationship();
 
-        String observationQuery = "( SELECT "+observationVariable.name+".* ";
+        // TODO: ifs
 
-        observationQuery += "FROM Observation AS "+observationVariable.name+ " JOIN ( ";
-        observationQuery += sensorQuery + " ) AS "+observationVariable.sensorVariable.name;
-        observationQuery += " ON ("+observationVariable.name+".sen_id = "+observationVariable.sensorVariable.name+".id) )";
-
-        return observationQuery;
+        return relationship;
     }
 
-    public String expandTable(CollectionVariable variable)
-    {
-        String table = variable.name+" AS "+variable.alias;
-
-        return table;
-    }
 }

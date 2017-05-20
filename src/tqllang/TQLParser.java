@@ -10,31 +10,12 @@ public class TQLParser
     public TQLScanner scanner;
     public Token token;
     public TQLQuery tqlQuery;
-    public HashMap<String, CollectionType> collectionTypeMapping;
 
     public TQLParser(String query)
     {
         scanner = new TQLScanner(query);
         token = scanner.getToken(false);
         tqlQuery = new TQLQuery();
-
-        collectionTypeMapping = new HashMap<>();
-        collectionTypeMapping.put("Group", CollectionType.group);
-        collectionTypeMapping.put("User", CollectionType.user);
-        collectionTypeMapping.put("Location", CollectionType.location);
-        collectionTypeMapping.put("Region", CollectionType.region);
-        collectionTypeMapping.put("InfrastructureType", CollectionType.infraType);
-        collectionTypeMapping.put("Infrastructure", CollectionType.infra);
-        collectionTypeMapping.put("PlatformType", CollectionType.platfromType);
-        collectionTypeMapping.put("Platform", CollectionType.platfrom);
-        collectionTypeMapping.put("SensorType", CollectionType.sensorType);
-        collectionTypeMapping.put("Sensor", CollectionType.sensor);
-        collectionTypeMapping.put("ObservationType", CollectionType.observationType);
-        collectionTypeMapping.put("Observation", CollectionType.observation);
-        collectionTypeMapping.put("SemanticObservationType", CollectionType.semanticObsType);
-        collectionTypeMapping.put("VirtualSensorType", CollectionType.virtualSensor);
-        collectionTypeMapping.put("VirtualSensor", CollectionType.virtualSensor);
-        collectionTypeMapping.put("SemanticObservation", CollectionType.semanticObservation);
     }
 
     public void eatToken(boolean whereClause)
@@ -44,6 +25,7 @@ public class TQLParser
 
     public void parse() throws TQLException
     {
+        // keep parsing until you reach the final query indicated by encountering "select"
         while(token != Token.selectToken)
         {
             if(token == Token.defineToken)
@@ -85,7 +67,7 @@ public class TQLParser
             throw new TQLException("Missing final query.");
         }
 
-        System.out.println();
+        System.out.println("Done parsing!");
     }
 
     public void define() throws TQLException
@@ -136,8 +118,11 @@ public class TQLParser
 
     public void assign() throws TQLException
     {
-        // do some logic with the identifier
+        // store the variable name of the collection
         String variableName = scanner.identifier;
+
+        if(!tqlQuery.collectionVariables.containsKey(variableName))
+            throw new TQLException("Variable "+variableName+" is not defined");
 
         // eat the identifier
         eatToken(false);
@@ -152,9 +137,11 @@ public class TQLParser
                 SQLQuery query = new SQLQuery();
 
                 // assign this query to the sensor variable
-                tqlQuery.sensorVariables.get(variableName).query = query;
+                ((SensorCollectionVariable)tqlQuery.collectionVariables.get(variableName)).query = query;
 
+                // parse the select statement and put it in the query of the sensor variable
                 selectStatement(query);
+
             }
             else if(token == Token.sensorToObsToken)
             {
@@ -168,22 +155,14 @@ public class TQLParser
 
                     if(token == Token.identToken)
                     {
-                        // do some logic
-                        if(tqlQuery.observationVariables.containsKey(variableName) && tqlQuery.sensorVariables.containsKey(scanner.identifier))
+                        // the scanner.identifier is the sensor variable to be assigned to the observation
+                        if(tqlQuery.collectionVariables.containsKey(scanner.identifier))
                         {
-                            tqlQuery.observationVariables.get(variableName).sensorVariable = tqlQuery.sensorVariables.get(scanner.identifier);
+                            ((ObservationCollectionVariable)tqlQuery.collectionVariables.get(variableName)).sensorVariable = (SensorCollectionVariable) tqlQuery.collectionVariables.get(scanner.identifier);
                         }
                         else
                         {
-                            // error
-                            if(!tqlQuery.sensorVariables.containsKey(scanner.identifier))
-                            {
-                                throw new TQLException("Sensor variable is not defined.");
-                            }
-                            else
-                            {
-                                throw new TQLException("Observation variable is not defined.");
-                            }
+                            throw new TQLException("Sensor variable "+scanner.identifier+" is not defined.");
                         }
 
                         // eat the ident.
@@ -196,33 +175,35 @@ public class TQLParser
                         }
                         else
                         {
-                            throw new TQLException("Missing \")\" for sensor_to_observations.");
+                            throw new TQLException("Missing \")\" for sensor_to_observations at "+variableName+".");
                         }
                     }
                     else
                     {
                         // error
-                        throw new TQLException("Error with sensor variable.");
+                        throw new TQLException("Error with sensor variable "+scanner.identifier+" assigned to observation.");
                     }
                 }
                 else
                 {
                     // error
-                    throw new TQLException("Syntax error for sensor_to_observations.");
+                    throw new TQLException("Syntax error for sensor_to_observations at variable "+variableName+".");
                 }
             }
             else
             {
                 // error
-                throw new TQLException("Unexpected expression for variable assignment.");
+                throw new TQLException("Unexpected expression for variable assignment for "+variableName+".");
             }
         }
         else
         {
             // error
-            throw new TQLException("Missing \"=\" after variable.");
+            throw new TQLException("Missing \"=\" after variable "+variableName+".");
         }
 
+        // by now, assignment should have been successful
+        tqlQuery.collectionVariables.get(variableName).isAssigned = true;
     }
 
     public void selectStatement(SQLQuery query) throws TQLException
@@ -339,58 +320,64 @@ public class TQLParser
     {
         if(variableType == Token.sensorToken)
         {
-            if(!tqlQuery.sensorVariables.containsKey(variableName))
+            if(!tqlQuery.collectionVariables.containsKey(variableName))
             {
-                tqlQuery.sensorVariables.put(variableName, new SensorCollectionVariable(variableName));
+                tqlQuery.collectionVariables.put(variableName, new SensorCollectionVariable(variableName));
             }
             else
-                throw new TQLException("Sensor variable is already defined");
+                throw new TQLException("Sensor variable "+variableName+" is already defined");
         }
         else
         {
-            if(!tqlQuery.observationVariables.containsKey(variableName))
+            if(!tqlQuery.collectionVariables.containsKey(variableName))
             {
-                tqlQuery.observationVariables.put(variableName, new ObservationCollectionVariable(variableName));
+                tqlQuery.collectionVariables.put(variableName, new ObservationCollectionVariable(variableName));
             }
             else
-                throw new TQLException("Observation variable is already defined");
+                throw new TQLException("Observation variable "+variableName+" is already defined");
         }
 
     }
 
-    public void addTableToQuery(SQLQuery query)
+    public void addTableToQuery(SQLQuery query) throws TQLException
     {
         // do some logic
         String collectionName = scanner.identifier;
-
         String aliasName = "";
 
         // eat the ident.
         eatToken(false);
 
-        // TODO: check if it has an alias
+        // TODO: check if it has an alias. We should enforce it
         if(token == Token.identToken)
         {
             aliasName = scanner.identifier;
             eatToken(false);
         }
+        else
+            throw new TQLException("Missing alias name for collection "+collectionName);
 
         // TODO: give warning if a variable is not assigned
-        if(tqlQuery.sensorVariables.containsKey(collectionName))
+        // collection in the "from" clause should be either collection variable or system-defined table
+        if(tqlQuery.collectionVariables.containsKey(collectionName))
         {
-            tqlQuery.sensorVariables.get(collectionName).alias = aliasName;
-            query.fromCollections.add(tqlQuery.sensorVariables.get(collectionName));
-        }
-        else if(tqlQuery.observationVariables.containsKey(collectionName))
-        {
-            tqlQuery.observationVariables.get(collectionName).alias = aliasName;
-            query.fromCollections.add(tqlQuery.observationVariables.get(collectionName));
+            Collection collection;
+            CollectionVariable collectionVariable = tqlQuery.collectionVariables.get(collectionName);
+
+            collection = collectionVariable.createCollection();
+            collection.alias = aliasName;
+            query.fromCollections.add(collection);
         }
         else
         {
             // get the type of the collection
-            CollectionType collectionType = collectionTypeMapping.get(collectionName);
-            query.fromCollections.add(new CollectionVariable(collectionName, aliasName, collectionType));
+            CollectionType collectionType = CollectionTypeMapping.getTypeOf(collectionName);
+
+            // TODO: check if collection type used is not one of the system-defined
+            if(collectionType == CollectionType.noType)
+                throw new TQLException("Could not recognize collection "+collectionName);
+
+            query.fromCollections.add(new Collection(collectionName, aliasName, collectionType));
         }
     }
 }

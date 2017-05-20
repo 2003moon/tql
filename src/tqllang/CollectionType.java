@@ -5,7 +5,8 @@ package tqllang;
  */
 public enum CollectionType
 {
-    table,
+    sensorVariable,
+    observationVariable,
     sensor,
     observation,
     group,
@@ -14,12 +15,13 @@ public enum CollectionType
     region,
     infraType,
     infra,
-    platfromType,
-    platfrom,
+    platformType,
+    platform,
     sensorType,
     observationType,
     semanticObsType,
     virtualSensorType,
     virtualSensor,
     semanticObservation,
+    noType
 }
