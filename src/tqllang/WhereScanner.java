@@ -103,8 +103,10 @@ public class WhereScanner
             }
 
             identifierString = identifierString+inputChar;
-
             identifier = identifierString;
+
+            next();
+
             return Token.stringToken;
         }
         else if(inputChar == '\'')
@@ -124,6 +126,7 @@ public class WhereScanner
                 error("Missing \' ");
             }
 
+            next();
             identifierString = identifierString+inputChar;
 
             identifier = identifierString;
@@ -156,7 +159,7 @@ public class WhereScanner
         {
             // just return the character as is
             identifier = inputChar+"";
-
+            next();
             return Token.characterToken;
         }
     }

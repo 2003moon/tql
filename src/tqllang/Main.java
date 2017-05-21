@@ -13,7 +13,7 @@ public class Main
 
         try
         {
-            Scanner input = new Scanner(new FileInputStream("example2"));
+            Scanner input = new Scanner(new FileInputStream("example3"));
             while(input.hasNextLine())
             {
                 query += input.nextLine()+"\n";

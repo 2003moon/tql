@@ -1,5 +1,8 @@
 package tqllang;
 
+import javax.management.relation.Relation;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
@@ -49,7 +52,7 @@ public class TQLTranslator
 
             observationQuery += "FROM Observation AS "+observationVariable.name+ " JOIN ( ";
             observationQuery += sensorSQL + " ) AS "+observationVariable.sensorVariable.name;
-            observationQuery += " ON ("+observationVariable.name+".sen_id = "+observationVariable.sensorVariable.name+".id)";
+            observationQuery += " ON ("+observationVariable.name+".sen_id = "+observationVariable.sensorVariable.name+".sen_id)";
 
             return observationQuery;
         }
@@ -64,7 +67,7 @@ public class TQLTranslator
 
         // parse the "where" clause first.
         // this method will add tables to the "fromCollection" if necessary
-        translateWhere(sqlQuery, collectionsJoinMap);
+        String whereCondition = translateWhere(sqlQuery, collectionsJoinMap);
 
         //TODO: attributes
         for(int i = 0; i < sqlQuery.attributesList.size(); i++)
@@ -119,6 +122,10 @@ public class TQLTranslator
             i++;
         }
 
+        // "where" clause
+        if(!whereCondition.isEmpty())
+            translatedQuery += " WHERE "+whereCondition;
+
         return translatedQuery;
     }
 
@@ -157,7 +164,7 @@ public class TQLTranslator
     public String figureOutJoins(SQLQuery query, HashMap<String, JoinTables> collectionsJoinMap, String attribute) throws TQLException
     {
         // there must always be at least two things ___.___
-        String[] array = attribute.split(".");
+        String[] array = attribute.split("\\.");
 
         // first one must always be alias
         CollectionType firstCollectionType = CollectionType.noType;
@@ -198,12 +205,15 @@ public class TQLTranslator
 
             if(relationship.type == RelationshipType.join)
             {
-                qualifiedName += "_"+array[i+1];
-
+                // TODO:
                 if(!collectionsJoinMap.containsKey(firstCollectionAlias))
                     collectionsJoinMap.put(firstCollectionAlias,new JoinTables());
 
-                collectionsJoinMap.get(firstCollectionAlias).addJoinTable(relationship.tableName,qualifiedName,relationship.column);
+                for(JoinTable jT : relationship.joinInformation)
+                {
+                    qualifiedName += "_"+jT.table;
+                    collectionsJoinMap.get(firstCollectionAlias).addJoinTable(jT.table,qualifiedName,jT.column);
+                }
             }
             else if(relationship.type == RelationshipType.attribute)
             {
@@ -213,6 +223,9 @@ public class TQLTranslator
             {
                 // TODO: check syntax for json
             }
+
+            // change the attribute name to its type for next iteration
+            array[i+1] = relationship.fieldType;
 
         }
 
@@ -224,6 +237,265 @@ public class TQLTranslator
         Relationship relationship = new Relationship();
 
         // TODO: ifs
+        if(s1.equals("Sensor") || s1.equals("SensorCollection"))
+        {
+            if(s2.equals("Location"))
+            {
+                relationship.fieldType = s2;
+                relationship.type = RelationshipType.join;
+                relationship.joinInformation.add(new JoinTable("Location","","loc_id"));
+            }
+            else if(s2.equals("Type"))
+            {
+                relationship.fieldType = "SensorType";
+                relationship.type = RelationshipType.join;
+                relationship.joinInformation.add(new JoinTable("SensorType","","sen_type_id"));
+            }
+            else if(s2.equals("Platform"))
+            {
+                relationship.fieldType = s2;
+                relationship.type = RelationshipType.join;
+                relationship.joinInformation.add(new JoinTable("Platform","","pltfm_id"));
+            }
+            else if(s2.equals("User"))
+            {
+                relationship.fieldType = s2;
+                relationship.type = RelationshipType.join;
+                relationship.joinInformation.add(new JoinTable("Users","","user_id"));
+            }
+            else if(s2.equals("CoverageRooms"))
+            {
+                relationship.fieldType = "Infrastructure";
+                relationship.type = RelationshipType.join;
+                relationship.joinInformation.add(new JoinTable("Sen_Infr","","sen_id"));
+                relationship.joinInformation.add(new JoinTable("Infrastructure","","infr_id"));
+            }
+            else
+            {
+                relationship.fieldType = s2;
+                relationship.type = RelationshipType.attribute;
+            }
+        }
+        else if(s1.equals("Observation") || s1.equals("ObservationCollection"))
+        {
+            if(s2.equals("Sensor"))
+            {
+                relationship.fieldType = s2;
+                relationship.type = RelationshipType.join;
+                relationship.joinInformation.add(new JoinTable("Sensor","","sen_id"));
+            }
+            else if(s2.equalsIgnoreCase("Type"))
+            {
+                relationship.fieldType = "ObservationType";
+                relationship.type = RelationshipType.join;
+                relationship.joinInformation.add(new JoinTable("ObservationType","","obs_type_id"));
+            }
+            else if(s2.equals("payload"))
+            {
+                relationship.fieldType = s2;
+                relationship.type = RelationshipType.json;
+            }
+            else
+            {
+                relationship.fieldType = s2;
+                relationship.type = RelationshipType.attribute;
+            }
+        }
+        else if(s1.equalsIgnoreCase("Group"))
+        {
+            relationship.fieldType = s2;
+            relationship.type = RelationshipType.attribute;
+        }
+        else if(s1.equalsIgnoreCase("User"))
+        {
+            if(s2.equalsIgnoreCase("Groups"))
+            {
+                relationship.fieldType = s2;
+                relationship.type = RelationshipType.join;
+                relationship.joinInformation.add(new JoinTable("Grp_User","","user_id"));
+                relationship.joinInformation.add(new JoinTable("Groups","","group_id"));
+            }
+            else
+            {
+                relationship.fieldType = s2;
+                relationship.type = RelationshipType.attribute;
+            }
+        }
+        else if(s1.equalsIgnoreCase("Location"))
+        {
+            relationship.fieldType = s2;
+            relationship.type = RelationshipType.attribute;
+        }
+        else if(s1.equalsIgnoreCase("Region"))
+        {
+            if(s2.equalsIgnoreCase("geometry"))
+            {
+                relationship.fieldType = "Location";
+                relationship.type = RelationshipType.join;
+                relationship.joinInformation.add(new JoinTable("Reg_Loc","","reg_id"));
+                relationship.joinInformation.add(new JoinTable("Location","","loc_id"));
+            }
+            else
+            {
+                relationship.fieldType = s2;
+                relationship.type = RelationshipType.attribute;
+            }
+        }
+        else if(s1.equalsIgnoreCase("InfrastructureType"))
+        {
+            relationship.fieldType = s2;
+            relationship.type = RelationshipType.attribute;
+        }
+        else if(s1.equalsIgnoreCase("Infrastructure"))
+        {
+            if(s2.equalsIgnoreCase("type"))
+            {
+                relationship.fieldType = "InfrastructureType";
+                relationship.type = RelationshipType.join;
+                relationship.joinInformation.add(new JoinTable("InfrastructureType","","infr_type_id"));
+            }
+            else if(s2.equalsIgnoreCase("Region"))
+            {
+                relationship.fieldType = s2;
+                relationship.type = RelationshipType.join;
+                relationship.joinInformation.add(new JoinTable("Region","","reg_id"));
+            }
+            else
+            {
+                relationship.fieldType = s2;
+                relationship.type = RelationshipType.attribute;
+            }
+        }
+        else if(s1.equalsIgnoreCase("PlatformType"))
+        {
+            relationship.fieldType = s2;
+            relationship.type = RelationshipType.attribute;
+        }
+        else if(s1.equalsIgnoreCase("Platform"))
+        {
+            if(s2.equalsIgnoreCase("type"))
+            {
+                relationship.fieldType = "PlatformType";
+                relationship.type = RelationshipType.join;
+                relationship.joinInformation.add(new JoinTable("PlatformType","","pltfm_type_id"));
+            }
+            else if(s2.equalsIgnoreCase("Location"))
+            {
+                relationship.fieldType = s2;
+                relationship.type = RelationshipType.join;
+                relationship.joinInformation.add(new JoinTable("Location","","loc_id"));
+            }
+            else if(s2.equalsIgnoreCase("owner"))
+            {
+                relationship.fieldType = "User";
+                relationship.type = RelationshipType.join;
+                relationship.joinInformation.add(new JoinTable("Users","","user_id"));
+            }
+            else
+            {
+                relationship.fieldType = s2;
+                relationship.type = RelationshipType.attribute;
+            }
+        }
+        else if(s1.equalsIgnoreCase("SensorType"))
+        {
+            if(s2.equalsIgnoreCase("payloadSchema"))
+            {
+                relationship.fieldType = s2;
+                relationship.type = RelationshipType.json;
+            }
+            else
+            {
+                relationship.fieldType = s2;
+                relationship.type = RelationshipType.attribute;
+            }
+
+        }
+        else if(s1.equalsIgnoreCase("ObservationType"))
+        {
+            if(s2.equalsIgnoreCase("payloadSchema"))
+            {
+                relationship.fieldType = s2;
+                relationship.type = RelationshipType.json;
+            }
+            else
+            {
+                relationship.fieldType = s2;
+                relationship.type = RelationshipType.attribute;
+            }
+        }
+        else if(s1.equalsIgnoreCase("SemanticObservationType"))
+        {
+            if(s2.equalsIgnoreCase("payloadSchema"))
+            {
+                relationship.fieldType = s2;
+                relationship.type = RelationshipType.json;
+            }
+            else
+            {
+                relationship.fieldType = s2;
+                relationship.type = RelationshipType.attribute;
+            }
+        }
+        else if(s1.equalsIgnoreCase("VirtualSensorType"))
+        {
+            if(s2.equalsIgnoreCase("observationType"))
+            {
+                relationship.fieldType = "ObservationType";
+                relationship.type = RelationshipType.join;
+                relationship.joinInformation.add(new JoinTable("ObservationType","","obs_type_id"));
+            }
+            else if(s2.equalsIgnoreCase("semanticObservationType"))
+            {
+                relationship.fieldType = "SemanticObservationType";
+                relationship.type = RelationshipType.join;
+                relationship.joinInformation.add(new JoinTable("SemanticObservationType","","so_type_id"));
+            }
+            else
+            {
+                relationship.fieldType = s2;
+                relationship.type = RelationshipType.attribute;
+            }
+        }
+        else if(s1.equalsIgnoreCase("VirtualSensor"))
+        {
+            if(s2.equalsIgnoreCase("type"))
+            {
+                relationship.fieldType = "VirtualSensorType";
+                relationship.type = RelationshipType.join;
+                relationship.joinInformation.add(new JoinTable("VirtualSensorType","","vs_type_id"));
+            }
+            else
+            {
+                relationship.fieldType = s2;
+                relationship.type = RelationshipType.attribute;
+            }
+        }
+        else if(s1.equalsIgnoreCase("SemanticObservation"))
+        {
+            if(s2.equalsIgnoreCase("virtualsensor"))
+            {
+                relationship.fieldType = "VirtualSensor";
+                relationship.type = RelationshipType.join;
+                relationship.joinInformation.add(new JoinTable("VirtualSensor","","vs_id"));
+            }
+            else if(s2.equalsIgnoreCase("type"))
+            {
+                relationship.fieldType = "SemanticObservationType";
+                relationship.type = RelationshipType.join;
+                relationship.joinInformation.add(new JoinTable("SemanticObservationType","","so_type_id"));
+            }
+            else if(s2.equalsIgnoreCase("payload"))
+            {
+                relationship.fieldType = s2;
+                relationship.type = RelationshipType.json;
+            }
+            else
+            {
+                relationship.fieldType = s2;
+                relationship.type = RelationshipType.attribute;
+            }
+        }
 
         return relationship;
     }

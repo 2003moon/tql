@@ -16,37 +16,37 @@ public class MySQLTableMapping
         switch(type)
         {
             case virtualSensorType:
-                return "";
+                return "VirtualSensorType";
             case virtualSensor:
-                return "";
+                return "VirtualSensor";
             case user:
-                return "";
+                return "Users";
             case sensorType:
-                return "";
+                return "SensorType";
             case group:
-                return "";
+                return "Groups";
             case infra:
-                return "";
+                return "Infrastructure";
             case infraType:
-                return "";
+                return "InfrastructureType";
             case location:
-                return "";
+                return "Location";
             case observation:
-                return "";
+                return "Observation";
             case observationType:
-                return "";
+                return "ObservationType";
             case platform:
-                return "";
+                return "Platform";
             case platformType:
-                return "";
+                return "PlatformType";
             case region:
-                return "";
+                return "Region";
             case semanticObservation:
-                return "";
+                return "SemanticObservation";
             case semanticObsType:
-                return "";
+                return "SemanticObservationType";
             case sensor:
-                return "";
+                return "Sensor";
 
             default:
                 return "";

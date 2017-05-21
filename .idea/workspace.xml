@@ -2,31 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5bf30b6b-7e9e-4ea3-8ab6-4051e57f2367" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tqllang/Collection.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tqllang/CollectionTypeMapping.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tqllang/JoinTable.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tqllang/JoinTables.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tqllang/MySQLTableMapping.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tqllang/Relationship.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tqllang/RelationshipType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/tql/tqllang/Collection.class" afterPath="$PROJECT_DIR$/out/production/tql/tqllang/Collection.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/tql/tqllang/CollectionVariable.class" afterPath="$PROJECT_DIR$/out/production/tql/tqllang/CollectionVariable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/tql/tqllang/ObservationCollectionVariable.class" afterPath="$PROJECT_DIR$/out/production/tql/tqllang/ObservationCollectionVariable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/tql/tqllang/SensorCollectionVariable.class" afterPath="$PROJECT_DIR$/out/production/tql/tqllang/SensorCollectionVariable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/tql/tqllang/TQLParser.class" afterPath="$PROJECT_DIR$/out/production/tql/tqllang/TQLParser.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/tql/tqllang/TQLQuery.class" afterPath="$PROJECT_DIR$/out/production/tql/tqllang/TQLQuery.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/tql/tqllang/TQLScanner.class" afterPath="$PROJECT_DIR$/out/production/tql/tqllang/TQLScanner.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/example3" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/tql/tqllang/Main.class" afterPath="$PROJECT_DIR$/out/production/tql/tqllang/Main.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/tql/tqllang/TQLTranslator.class" afterPath="$PROJECT_DIR$/out/production/tql/tqllang/TQLTranslator.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/tql/tqllang/Token.class" afterPath="$PROJECT_DIR$/out/production/tql/tqllang/Token.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tqllang/CollectionType.java" afterPath="$PROJECT_DIR$/src/tqllang/CollectionType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tqllang/CollectionVariable.java" afterPath="$PROJECT_DIR$/src/tqllang/CollectionVariable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tqllang/ObservationCollectionVariable.java" afterPath="$PROJECT_DIR$/src/tqllang/ObservationCollectionVariable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tqllang/SQLQuery.java" afterPath="$PROJECT_DIR$/src/tqllang/SQLQuery.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tqllang/SensorCollectionVariable.java" afterPath="$PROJECT_DIR$/src/tqllang/SensorCollectionVariable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tqllang/TQLParser.java" afterPath="$PROJECT_DIR$/src/tqllang/TQLParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tqllang/TQLQuery.java" afterPath="$PROJECT_DIR$/src/tqllang/TQLQuery.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tqllang/Main.java" afterPath="$PROJECT_DIR$/src/tqllang/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tqllang/MySQLTableMapping.java" afterPath="$PROJECT_DIR$/src/tqllang/MySQLTableMapping.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tqllang/Relationship.java" afterPath="$PROJECT_DIR$/src/tqllang/Relationship.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tqllang/TQLTranslator.java" afterPath="$PROJECT_DIR$/src/tqllang/TQLTranslator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tqllang/WhereScanner.java" afterPath="$PROJECT_DIR$/src/tqllang/WhereScanner.java" />
     </list>
     <ignored path="tql.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -51,7 +35,7 @@
       <file leaf-file-name="TQLParser.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tqllang/TQLParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
+            <state relative-caret-position="1725">
               <caret line="205" column="17" lean-forward="false" selection-start-line="205" selection-start-column="17" selection-end-line="205" selection-end-column="17" />
               <folding>
                 <element signature="method#parse#0;class#TQLParser#0" expanded="false" />
@@ -65,91 +49,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TQLTranslator.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/tqllang/TQLTranslator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="225" column="17" lean-forward="false" selection-start-line="225" selection-start-column="17" selection-end-line="225" selection-end-column="17" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#translate#0;class#TQLTranslator#0" expanded="false" />
-                <element signature="method#translateCollection#0;class#TQLTranslator#0" expanded="false" />
-                <element signature="method#translateSQL#0;class#TQLTranslator#0" expanded="false" />
-                <element signature="method#translateWhere#0;class#TQLTranslator#0" expanded="false" />
-                <element signature="method#figureOutJoins#0;class#TQLTranslator#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="TQLQuery.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tqllang/TQLQuery.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="239">
+            <state relative-caret-position="270">
               <caret line="18" column="8" lean-forward="false" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Relationship.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/tqllang/Relationship.java">
+      <file leaf-file-name="SQLQuery.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/tqllang/SQLQuery.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="225">
-              <caret line="15" column="12" lean-forward="false" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RelationshipType.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/tqllang/RelationshipType.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="8" lean-forward="false" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="JoinTables.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/tqllang/JoinTables.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="26" column="18" lean-forward="false" selection-start-line="26" selection-start-column="18" selection-end-line="26" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="JoinTable.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/tqllang/JoinTable.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="27" lean-forward="false" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CollectionTypeMapping.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/tqllang/CollectionTypeMapping.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="840">
-              <caret line="56" column="38" lean-forward="false" selection-start-line="56" selection-start-column="38" selection-end-line="56" selection-end-column="38" />
+              <caret line="15" column="48" lean-forward="false" selection-start-line="15" selection-start-column="48" selection-end-line="15" selection-end-column="48" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MySQLTableMapping.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/tqllang/MySQLTableMapping.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="16" lean-forward="false" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -186,10 +103,8 @@
         <option value="$PROJECT_DIR$/src/tqllang/MissingSemiColon.java" />
         <option value="$PROJECT_DIR$/src/tqllang/TQLException.java" />
         <option value="$PROJECT_DIR$/src/tqllang/TQLReader.java" />
-        <option value="$PROJECT_DIR$/src/tqllang/Main.java" />
         <option value="$PROJECT_DIR$/src/tqllang/TQLScanner.java" />
         <option value="$PROJECT_DIR$/src/tqllang/Token.java" />
-        <option value="$PROJECT_DIR$/src/tqllang/WhereScanner.java" />
         <option value="$PROJECT_DIR$/src/tqllang/WhereCondition.java" />
         <option value="$PROJECT_DIR$/src/tqllang/WhereClause.java" />
         <option value="$PROJECT_DIR$/src/tqllang/SQLQuery.java" />
@@ -205,8 +120,11 @@
         <option value="$PROJECT_DIR$/src/tqllang/JoinTables.java" />
         <option value="$PROJECT_DIR$/src/tqllang/RelationshipType.java" />
         <option value="$PROJECT_DIR$/src/tqllang/Relationship.java" />
-        <option value="$PROJECT_DIR$/src/tqllang/TQLTranslator.java" />
+        <option value="$PROJECT_DIR$/example3" />
+        <option value="$PROJECT_DIR$/src/tqllang/Main.java" />
         <option value="$PROJECT_DIR$/src/tqllang/MySQLTableMapping.java" />
+        <option value="$PROJECT_DIR$/src/tqllang/WhereScanner.java" />
+        <option value="$PROJECT_DIR$/src/tqllang/TQLTranslator.java" />
       </list>
     </option>
   </component>
@@ -290,6 +208,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src/tqllang" />
       <recent name="$PROJECT_DIR$/src" />
     </key>
@@ -738,7 +657,7 @@
       <option name="presentableId" value="Default" />
       <updated>1492995919062</updated>
       <workItem from="1492995920814" duration="145000" />
-      <workItem from="1493886992165" duration="81302000" />
+      <workItem from="1493886992165" duration="92710000" />
     </task>
     <task id="LOCAL-00001" summary="Version 1">
       <created>1494133340706</created>
@@ -796,11 +715,18 @@
       <option name="project" value="LOCAL" />
       <updated>1494818434065</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Version 5:&#10;- first attempt to solve the &quot;.&quot; notation">
+      <created>1495258661217</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1495258661217</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="81447000" />
+    <option name="totallyTimeSpent" value="92855000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="82" y="23" width="1061" height="726" extended-state="0" />
@@ -815,7 +741,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3242424" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32267883" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -828,7 +754,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39848486" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39726028" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -850,11 +776,32 @@
     <MESSAGE value="Version 2:&#10;- Fixed the input file since it was causing due to unrecognized characters!!&#10;- Fixed some bugs related to forgetting to eat the token.&#10;- Included throw statements to report errors while parsing." />
     <MESSAGE value="Version 3:&#10;- Simple queries with now &quot;where&quot;" />
     <MESSAGE value="Version 4:&#10;- trying to solve the &quot;.&quot; thing!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Version 4:&#10;- trying to solve the &quot;.&quot; thing!" />
+    <MESSAGE value="Version 5:&#10;- first attempt to solve the &quot;.&quot; notation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Version 5:&#10;- first attempt to solve the &quot;.&quot; notation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="19" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/tqllang/TQLTranslator.java</url>
+          <line>102</line>
+          <properties />
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/tqllang/TQLTranslator.java</url>
+          <line>126</line>
+          <properties />
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/tqllang/TQLTranslator.java</url>
+          <line>69</line>
+          <properties />
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="29" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -902,17 +849,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tqllang/MissingSemiColon.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="23" lean-forward="false" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
-          <folding>
-            <element signature="e#131#132#0" expanded="true" />
-            <element signature="e#161#162#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/tqllang/TQLException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -924,32 +860,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tqllang/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-22">
-          <caret line="15" column="69" lean-forward="false" selection-start-line="15" selection-start-column="69" selection-end-line="15" selection-end-column="69" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/tqllang/TQLReader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="18" column="34" lean-forward="true" selection-start-line="18" selection-start-column="34" selection-end-line="18" selection-end-column="34" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tqllang/WhereScanner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1350">
-          <caret line="162" column="4" lean-forward="false" selection-start-line="162" selection-start-column="4" selection-end-line="162" selection-end-column="4" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#error#0;class#WhereScanner#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1011,16 +926,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tqllang/SQLQuery.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/tqllang/Collection.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -1058,14 +963,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tqllang/JoinTable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="27" lean-forward="false" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/tqllang/RelationshipType.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -1074,25 +971,105 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/tqllang/JoinTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="27" lean-forward="false" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example2">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example3">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="46" lean-forward="false" selection-start-line="8" selection-start-column="46" selection-end-line="8" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tqllang/TQLTranslator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3729">
+          <caret line="54" column="124" lean-forward="false" selection-start-line="54" selection-start-column="124" selection-end-line="54" selection-end-column="124" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#327#328#0" expanded="true" />
+            <element signature="e#384#385#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tqllang/MySQLTableMapping.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="48" column="30" lean-forward="false" selection-start-line="48" selection-start-column="30" selection-end-line="48" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tqllang/WhereScanner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="804">
+          <caret line="106" column="0" lean-forward="false" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#WhereScanner#0;class#WhereScanner#0" expanded="false" />
+            <element signature="method#next#0;class#WhereScanner#0" expanded="false" />
+            <element signature="method#error#0;class#WhereScanner#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tqllang/MissingSemiColon.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="23" lean-forward="false" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
+          <folding>
+            <element signature="e#131#132#0" expanded="true" />
+            <element signature="e#161#162#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/tqllang/Relationship.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="12" lean-forward="false" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
-          <folding />
+        <state relative-caret-position="210">
+          <caret line="14" column="5" lean-forward="false" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
+          <folding>
+            <element signature="e#300#301#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tqllang/JoinTables.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="26" column="18" lean-forward="false" selection-start-line="26" selection-start-column="18" selection-end-line="26" selection-end-column="18" />
+        <state relative-caret-position="360">
+          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tqllang/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tqllang/TQLParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
+        <state relative-caret-position="1725">
           <caret line="205" column="17" lean-forward="false" selection-start-line="205" selection-start-column="17" selection-end-line="205" selection-end-column="17" />
           <folding>
             <element signature="method#parse#0;class#TQLParser#0" expanded="false" />
@@ -1107,32 +1084,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tqllang/TQLQuery.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
+        <state relative-caret-position="270">
           <caret line="18" column="8" lean-forward="false" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tqllang/TQLTranslator.java">
+    <entry file="file://$PROJECT_DIR$/src/tqllang/SQLQuery.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="225" column="17" lean-forward="false" selection-start-line="225" selection-start-column="17" selection-end-line="225" selection-end-column="17" />
+        <state relative-caret-position="225">
+          <caret line="15" column="48" lean-forward="false" selection-start-line="15" selection-start-column="48" selection-end-line="15" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#translate#0;class#TQLTranslator#0" expanded="false" />
-            <element signature="method#translateCollection#0;class#TQLTranslator#0" expanded="false" />
-            <element signature="method#translateSQL#0;class#TQLTranslator#0" expanded="false" />
-            <element signature="method#translateWhere#0;class#TQLTranslator#0" expanded="false" />
-            <element signature="method#figureOutJoins#0;class#TQLTranslator#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tqllang/MySQLTableMapping.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="16" lean-forward="false" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>

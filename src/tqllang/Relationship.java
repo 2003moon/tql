@@ -1,23 +1,18 @@
 package tqllang;
 
+import java.util.ArrayList;
+
 /**
  * Created by Yas
  */
 public class Relationship
 {
-    public String tableName;
-    public String column;
+    public String fieldType;
     public RelationshipType type;
-
-    public Relationship(String tn, String c, RelationshipType t)
-    {
-        tableName = tn;
-        column = c;
-        type = t;
-    }
+    public ArrayList<JoinTable> joinInformation;
 
     public Relationship()
     {
-
+        this.joinInformation = new ArrayList<>();
     }
 }
