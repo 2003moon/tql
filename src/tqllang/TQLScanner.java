@@ -1,41 +1,28 @@
 package tqllang;
 
+import java.io.IOException;
+import java.util.HashMap;
+
 /**
  * Created by Yas.
  */
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
 
 public class TQLScanner
 {
+    public int currentLine;
+    public int currentCharPosition;
+    public String tokenString;
+
     private TQLReader reader;
     private char inputChar;
-    public String identifier;       // if it sees a string, it will be stored here
-    private String identifierString;    // this is to build the characters and eventually store the final in identifierName
+    private String tokenStringBuilder;
     private HashMap<String, Token> keywordTable;
-    private LinkedList<String> identifierTable;
-    private double number;  // if it sees a constant number, the value will be stored here
-    private int id;
     private boolean firstRun;
-    private int currentLine;
-    private int currentCharPosition;
-    private HashSet<Character> otherCharacters;
 
     public TQLScanner(String query)
     {
         reader = new TQLReader(query);
-        identifierString = "";
-
-        otherCharacters = new HashSet<Character>();
-        otherCharacters.add('=');
-        otherCharacters.add('*');
-        otherCharacters.add(',');
-        otherCharacters.add(';');
-        otherCharacters.add('(');
-        otherCharacters.add(')');
+        tokenStringBuilder = "";
 
         // pre-populate keyword table with keywords
         keywordTable = new HashMap<>(15);
@@ -47,8 +34,9 @@ public class TQLScanner
         keywordTable.put("as", Token.asToken);
         keywordTable.put("from", Token.fromToken);
         keywordTable.put("where", Token.whereToken);
+        keywordTable.put("group by", Token.groupbyToken);
+        keywordTable.put("having", Token.havingToken);
 
-        identifierTable = new LinkedList<>();
         firstRun = true;
         currentLine = 1;
         currentCharPosition = 1;
@@ -84,10 +72,10 @@ public class TQLScanner
         }
     }
 
-    public Token getToken(boolean whereClause)
+    public Token getToken(boolean preserveCharacter)
     {
-        // don't eat spaces if you are reading for where clause
-        if(!whereClause)
+        // don't eat spaces if you are reading as a string for "WHERE", "GROUP BY" and "HAVING"
+        if(!preserveCharacter)
             eatSpaces();
 
         // error character, end of file characters
@@ -104,58 +92,107 @@ public class TQLScanner
             eatSpaces();
         }*/
 
-        identifierString = "";
+        tokenStringBuilder = "";
 
         switch (inputChar)
         {
             case (char)-1:
-                System.out.println("Reached end of file");
+                //System.out.println("Reached end of file");
                 return Token.endOfFileToken;
             case '*':
                 // eat "*"
                 next();
-                identifier = "*";
+                tokenString = "*";
                 return Token.timesToken;
             case '=':
                 // eat "="
                 next();
-                identifier = "=";
+                tokenString = "=";
                 return Token.eqlToken;
             case ',':
                 // eat ","
                 next();
-                identifier = ",";
+                tokenString = ",";
                 return Token.commaToken;
             case ')':
                 // eat ")"
                 next();
-                identifier = ")";
+                tokenString = ")";
                 return Token.closeparenToken;
             case '(':
                 // eat "("
                 next();
-                identifier = "(";
+                tokenString = "(";
                 return Token.openparenToken;
             case ';':
                 next();
-                identifier = ";";
+                tokenString = ";";
                 return Token.semiToken;
             default:
 
+                // TODO: code needs to handle string quotes "...."
                 if(Character.isLetter(inputChar))
                 {
                     // TODO: Think
                     while (Character.isLetterOrDigit(inputChar) || inputChar == '.' || inputChar == '_' || inputChar == '*')
                     {
-                        identifierString = identifierString+inputChar;
+                        tokenStringBuilder = tokenStringBuilder+inputChar;
                         next();
                     }
 
-                    identifier = identifierString;
+                    tokenString = tokenStringBuilder;
 
-                    if(keywordTable.containsKey(identifierString.toLowerCase()))
+                    // this is for group by
+                    if(tokenString.equalsIgnoreCase("group"))
                     {
-                        return keywordTable.get(identifierString.toLowerCase());
+                        try
+                        {
+                            // save the state
+                            int savedLine = currentLine;
+                            int savedCharPosition = currentCharPosition;
+                            char savedChar = inputChar;
+                            String savedTokenString = tokenString;
+                            String builder = "";
+
+                            reader.markPosition();
+
+                            eatSpaces();
+
+                            if(inputChar == 'b' || inputChar == 'B')
+                            {
+                                builder += inputChar;
+
+                                next();
+
+                                if(inputChar == 'y' || inputChar == 'Y')
+                                {
+                                    builder += inputChar;
+
+                                    next();
+
+                                    if(Character.isWhitespace(inputChar))
+                                    {
+                                        tokenString = savedTokenString+" "+builder;
+                                        return Token.groupbyToken;
+                                    }
+                                }
+                            }
+
+                            // undo the reading since it's not a "group by"
+                            currentLine = savedLine;
+                            currentCharPosition = savedCharPosition;
+                            inputChar = savedChar;
+                            reader.resetToPosition();
+                        }
+                        catch (IOException e)
+                        {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    if(keywordTable.containsKey(tokenStringBuilder.toLowerCase()))
+                    {
+                        return keywordTable.get(tokenStringBuilder.toLowerCase());
                     }
                     else
                     {
@@ -163,9 +200,9 @@ public class TQLScanner
                     }
                 }
 
-                if(whereClause)
+                if(preserveCharacter)
                 {
-                    identifier = ""+inputChar;
+                    tokenString = ""+inputChar;
                     next();
                     return Token.identToken;
                 }
@@ -176,7 +213,7 @@ public class TQLScanner
 
     public boolean isKeyword(String name)
     {
-        return keywordTable.containsKey(name);
+        return keywordTable.containsKey(name.toLowerCase());
     }
 
     private void eatSpaces()

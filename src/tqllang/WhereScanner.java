@@ -2,31 +2,26 @@ package tqllang;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
 
 /**
  * Created by Yas
  */
+
 public class WhereScanner
 {
     private TQLReader reader;
     private char inputChar;
-    public String identifier;       // if it sees a string, it will be stored here
-    private String identifierString;    // this is to build the characters and eventually store the final in identifierName
+    public String tokenString;
+    private String tokenStringBuilder;
     private HashMap<String, Token> keywordTable;
-    //private LinkedList<String> identifierTable;
-    //private double number;  // if it sees a constant number, the value will be stored here
-    //private int id;
     private boolean firstRun;
     private int currentLine;
     private int currentCharPosition;
-    //private HashSet<Character> otherCharacters;
 
     public WhereScanner(String whereClause)
     {
         reader = new TQLReader(whereClause);
-        identifierString = "";
+        tokenStringBuilder = "";
 
         // pre-populate keyword table with keywords
         keywordTable = new HashMap<>(15);
@@ -69,7 +64,7 @@ public class WhereScanner
         }
     }
 
-    public Token getToken()
+    public Token getToken() throws TQLException
     {
         // error character, end of file characters
         if (inputChar == 0x00)
@@ -78,32 +73,33 @@ public class WhereScanner
             return Token.errorToken;
         }
 
-        identifierString = "";
+        tokenStringBuilder = "";
 
         if(inputChar == (char)-1)
         {
-            System.out.println("Reached end of file");
+            //System.out.println("Reached end of file");
             return Token.endOfFileToken;
         }
         else if(inputChar == '\"')
         {
-            identifierString = identifierString+inputChar;
+            tokenStringBuilder = tokenStringBuilder+inputChar;
             next();
 
             // keep reading until you find "
             while(inputChar != '\"')
             {
-                identifierString = identifierString+inputChar;
+                // Exception when you reach end of file or there is an error in reading
+                if(inputChar == 0x00 || inputChar == 0xff || inputChar == (char)-1)
+                {
+                    throw new TQLException("Syntax error near a String");
+                }
+
+                tokenStringBuilder = tokenStringBuilder+inputChar;
                 next();
             }
 
-            if(inputChar != '\"')
-            {
-                error("Missing \" ");
-            }
-
-            identifierString = identifierString+inputChar;
-            identifier = identifierString;
+            tokenStringBuilder = tokenStringBuilder+inputChar;
+            tokenString = tokenStringBuilder;
 
             next();
 
@@ -111,25 +107,27 @@ public class WhereScanner
         }
         else if(inputChar == '\'')
         {
-            identifierString = identifierString+inputChar;
+            tokenStringBuilder = tokenStringBuilder+inputChar;
             next();
 
-            // keep reading until you find "
+            // keep reading until you find '
             while(inputChar != '\'')
             {
-                identifierString = identifierString+inputChar;
+                // Exception when you reach end of file or there is an error in reading
+                if(inputChar == 0x00 || inputChar == 0xff || inputChar == (char)-1)
+                {
+                    throw new TQLException("Syntax error near a String");
+                }
+
+                tokenStringBuilder = tokenStringBuilder+inputChar;
                 next();
             }
 
-            if(inputChar != '\'')
-            {
-                error("Missing \' ");
-            }
+            tokenStringBuilder = tokenStringBuilder+inputChar;
+            tokenString = tokenStringBuilder;
 
             next();
-            identifierString = identifierString+inputChar;
 
-            identifier = identifierString;
             return Token.stringToken;
 
         }
@@ -139,15 +137,15 @@ public class WhereScanner
             // TODO: Think
             while (Character.isLetterOrDigit(inputChar) || inputChar == '.' || inputChar == '_')
             {
-                identifierString = identifierString+inputChar;
+                tokenStringBuilder = tokenStringBuilder+inputChar;
                 next();
             }
 
-            identifier = identifierString;
+            tokenString = tokenStringBuilder;
 
-            if(keywordTable.containsKey(identifierString.toLowerCase()))
+            if(keywordTable.containsKey(tokenStringBuilder.toLowerCase()))
             {
-                return keywordTable.get(identifierString.toLowerCase());
+                return keywordTable.get(tokenStringBuilder.toLowerCase());
             }
             else
             {
@@ -158,7 +156,7 @@ public class WhereScanner
         else
         {
             // just return the character as is
-            identifier = inputChar+"";
+            tokenString = inputChar+"";
             next();
             return Token.characterToken;
         }

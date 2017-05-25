@@ -7,9 +7,3 @@ sensor_collection1 = SELECT sen.* FROM Sensor sen;
 observation_collection1 = SENSORS_TO_OBSERVATIONS(sensor_collection1);
 
 SELECT obs.* FROM observation_collection1 obs;
-
-
-SELECT obs.* FROM 
-( SELECT observation_collection1.* FROM Observation AS observation_collection1 JOIN ( SELECT sen.* FROM Sensor AS sen ) AS sensor_collection1 ON observation_collection1.id = sensor_collection1.id ) AS obs
-
-on (observation_collection1.sen_id = sensor_collection1.id)

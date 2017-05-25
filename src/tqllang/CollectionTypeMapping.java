@@ -1,11 +1,9 @@
 package tqllang;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 /**
  * Yas
  */
+
 public class CollectionTypeMapping
 {
     public static String getNameOf(CollectionType type)

@@ -143,11 +143,11 @@ public class TQLTranslator
                 // if token is identifier, then figure out the join (if you actually need a join)
                 if(token == Token.identToken)
                 {
-                    modifiedWhere += figureOutJoins(query, collectionsJoinMap, whereScanner.identifier);
+                    modifiedWhere += figureOutJoins(query, collectionsJoinMap, whereScanner.tokenString);
                 }
                 else
                 {
-                    modifiedWhere += whereScanner.identifier;
+                    modifiedWhere += whereScanner.tokenString;
                 }
 
                 token = whereScanner.getToken();

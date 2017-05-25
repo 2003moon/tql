@@ -3,6 +3,7 @@ package tqllang;
 /**
  * Created Yas
  */
+
 public class JoinTable
 {
     public String table;

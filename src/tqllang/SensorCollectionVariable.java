@@ -17,7 +17,7 @@ public class SensorCollectionVariable extends CollectionVariable
     {
         SensorCollectionVariable collection = new SensorCollectionVariable(this.name);
         collection.query = this.query;
-        // TODO: isAssigned is not set
+        collection.isAssigned = this.isAssigned;
 
         return collection;
     }

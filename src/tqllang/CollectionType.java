@@ -3,6 +3,7 @@ package tqllang;
 /**
  * Yas
  */
+
 public enum CollectionType
 {
     sensorVariable,

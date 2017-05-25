@@ -3,6 +3,7 @@ package tqllang;
 /**
  * Yas
  */
+
 public class ObservationCollectionVariable extends CollectionVariable
 {
     public SensorCollectionVariable sensorVariable;
@@ -16,6 +17,7 @@ public class ObservationCollectionVariable extends CollectionVariable
     {
         ObservationCollectionVariable collection = new ObservationCollectionVariable(this.name);
         collection.sensorVariable = this.sensorVariable;
+        collection.isAssigned = this.isAssigned;
 
         return collection;
     }

@@ -13,29 +13,30 @@ public class Main
 
         try
         {
-            Scanner input = new Scanner(new FileInputStream("example3"));
+            Scanner input = new Scanner(new FileInputStream("example"));
+
             while(input.hasNextLine())
             {
                 query += input.nextLine()+"\n";
             }
+
+            TQLParser tqlParser = new TQLParser(query);
+            //TQLTranslator translator = new TQLTranslator();
+            TQLTranslator3 translator = new TQLTranslator3();
+
+            try
+            {
+                tqlParser.parse();
+                System.out.println(translator.translate(tqlParser.tqlQuery));
+            }
+            catch(TQLException e)
+            {
+                System.out.println(e.getMessage());
+            }
         }
         catch (FileNotFoundException e)
         {
-            e.printStackTrace();
-        }
-
-        TQLParser tqlParser = new TQLParser(query);
-        TQLTranslator translator = new TQLTranslator();
-
-        try
-        {
-            tqlParser.parse();
-            System.out.println(translator.translate(tqlParser.tqlQuery));
-        }
-        catch(TQLException e)
-        {
             System.out.println(e.getMessage());
         }
-
     }
 }

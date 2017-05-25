@@ -8,6 +8,8 @@ public enum Token
     selectToken,
     fromToken,
     whereToken,
+    groupbyToken,
+    havingToken,
     asToken,
     numberToken,
     identToken,
@@ -40,30 +42,10 @@ public enum Token
     openparenToken,
     closeparenToken,
 
-    openbracketToken,
-    closebracketToken,
-
     endOfFileToken,
     errorToken,
 
     periodToken,
     varToken,
-    arrayToken,
-    becomesToken,
-    thenToken,
-    doToken,
-    semiToken,
-    endToken,
-    odToken,
-    fiToken,
-    elseToken,
-    letToken,
-    callToken,
-    ifToken,
-    whileToken,
-    returnToken,
-    funcToken,
-    procToken,
-    beginToken,
-    mainToken
+    semiToken
 }

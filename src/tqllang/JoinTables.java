@@ -5,6 +5,7 @@ import java.util.ArrayList;
 /**
  * Created Yas
  */
+
 public class JoinTables
 {
     public ArrayList<JoinTable> joinTables;

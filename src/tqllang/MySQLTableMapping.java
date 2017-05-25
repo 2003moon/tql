@@ -3,6 +3,7 @@ package tqllang;
 /**
  * Yas
  */
+
 public class MySQLTableMapping
 {
     public static String getMySQLNameFor(String collectionName)

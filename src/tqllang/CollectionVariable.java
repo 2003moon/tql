@@ -3,6 +3,7 @@ package tqllang;
 /**
  * Created Yas
  */
+
 public class CollectionVariable extends Collection
 {
     public boolean isAssigned;

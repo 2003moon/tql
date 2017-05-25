@@ -1,9 +1,10 @@
 package tqllang;
 
+import java.io.*;
+
 /**
  * Created by Yas.
  */
-import java.io.*;
 
 public class TQLReader
 {
@@ -17,5 +18,15 @@ public class TQLReader
     public char getCharacter() throws IOException
     {
         return (char) reader.read();
+    }
+
+    public void markPosition() throws IOException
+    {
+        reader.mark(100);
+    }
+
+    public void resetToPosition() throws IOException
+    {
+        reader.reset();
     }
 }
