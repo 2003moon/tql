@@ -29,6 +29,7 @@ public class TQLTranslator2 {
         }
 
         String finalSQL = translateSQL(tqlQuery.finalQuery);
+        finalSQL += ";";
 
         return finalSQL;
     }
@@ -52,9 +53,9 @@ public class TQLTranslator2 {
             // form the SQL of the observation
             String observationQuery = "SELECT "+observationVariable.name+".* ";
 
-            observationQuery += "FROM Observation AS "+observationVariable.name+ " JOIN ( ";
+            observationQuery += "FROM Observation AS "+observationVariable.name+ " ,( ";
             observationQuery += sensorSQL + " ) AS "+observationVariable.sensorVariable.name;
-            observationQuery += " ON ("+observationVariable.name+".sen_id = "+observationVariable.sensorVariable.name+".sen_id)";
+            observationQuery += " where "+observationVariable.name+".sen_id = "+observationVariable.sensorVariable.name+".sen_id";
 
             return observationQuery;
         }
@@ -131,9 +132,30 @@ public class TQLTranslator2 {
         // "where" clause
         if(!whereCondition.isEmpty())
             translatedQuery += " WHERE "+whereCondition;
+        //"Group" clause
+        if(sqlQuery.groupby != null)
+        {
+            sqlQuery.groupby = sqlQuery.groupby.trim();
+            if(!sqlQuery.groupby.isEmpty())
+            {
+                translatedQuery += "\nGROUP BY "+sqlQuery.groupby;
+            }
+        }
+
+
+        // "HAVING"
+        if(sqlQuery.having != null)
+        {
+            sqlQuery.having = sqlQuery.having.trim();
+            if(!sqlQuery.having.isEmpty())
+            {
+                translatedQuery += "\nHAVING "+sqlQuery.groupby;
+            }
+        }
 
         return translatedQuery;
     }
+
 
     public String translateWhere(SQLQuery query, HashMap<String, JoinTables> collectionsJoinMap) throws TQLException
     {
