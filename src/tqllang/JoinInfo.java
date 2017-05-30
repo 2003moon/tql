@@ -102,7 +102,7 @@ public class JoinInfo
         }
         else
         {
-            joinInfo.alias = this.alias+"."+TQLAttribute;
+            joinInfo.alias = this.alias+"."+relationship.fieldType;
         }
 
         return joinInfo;

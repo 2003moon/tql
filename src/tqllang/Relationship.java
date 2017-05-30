@@ -62,6 +62,11 @@ public class Relationship
             }
             else
             {
+                if(s2.equals("id"))
+                    relationship.fieldType = "sen_id";
+                else if(s2.equals("IP"))
+                    relationship.fieldType = "ip";
+
                 relationship.type = RelationshipType.attribute;
             }
         }
@@ -89,6 +94,11 @@ public class Relationship
             }
             else
             {
+                if(s2.equals("id"))
+                    relationship.fieldType = "obs_id";
+                else if(s2.equals("timestamp"))
+                    relationship.fieldType = "timestamps";  // TODO: check this
+
                 relationship.type = RelationshipType.attribute;
             }
         }
@@ -98,6 +108,9 @@ public class Relationship
             {
                 throwUnrecognizedException(s2);
             }
+
+            if(s2.equals("id"))
+                relationship.fieldType = "group_id";
 
             relationship.type = RelationshipType.attribute;
         }
@@ -143,6 +156,11 @@ public class Relationship
             }
             else
             {
+                if(s2.equals("id"))
+                    relationship.fieldType = "reg_id";
+                else if(s2.equals("floor"))
+                    relationship.fieldType = "floors";  // TODO: check this
+
                 relationship.type = RelationshipType.attribute;
             }
         }
@@ -152,6 +170,9 @@ public class Relationship
             {
                 throwUnrecognizedException(s2);
             }
+
+            if(s2.equals("id"))
+                relationship.fieldType = "infr_type_id";
 
             relationship.type = RelationshipType.attribute;
         }
@@ -175,6 +196,9 @@ public class Relationship
             }
             else
             {
+                if(s2.equals("id"))
+                    relationship.fieldType = "infr_id";
+
                 relationship.type = RelationshipType.attribute;
             }
         }
@@ -184,6 +208,9 @@ public class Relationship
             {
                 throwUnrecognizedException(s2);
             }
+
+            if(s2.equals("id"))
+                relationship.fieldType = "pltfm_type_id";
 
             relationship.type = RelationshipType.attribute;
         }
@@ -213,6 +240,9 @@ public class Relationship
             }
             else
             {
+                if(s2.equals("id"))
+                    relationship.fieldType = "pltfm_id";
+
                 relationship.type = RelationshipType.attribute;
             }
         }
@@ -228,6 +258,9 @@ public class Relationship
             }
             else
             {
+                if(s2.equals("id"))
+                    relationship.fieldType = "sen_type_id";
+
                 relationship.type = RelationshipType.attribute;
             }
 
@@ -244,6 +277,9 @@ public class Relationship
             }
             else
             {
+                if(s2.equals("id"))
+                    relationship.fieldType = "obs_type_id";
+
                 relationship.type = RelationshipType.attribute;
             }
         }
@@ -259,6 +295,9 @@ public class Relationship
             }
             else
             {
+                if(s2.equals("id"))
+                    relationship.fieldType = "so_type_id";
+
                 relationship.type = RelationshipType.attribute;
             }
         }
@@ -282,6 +321,9 @@ public class Relationship
             }
             else
             {
+                if(s2.equals("id"))
+                    relationship.fieldType = "vs_type_id";
+
                 relationship.type = RelationshipType.attribute;
             }
         }
@@ -299,6 +341,11 @@ public class Relationship
             }
             else
             {
+                if(s2.equals("id"))
+                    relationship.fieldType = "vs_id";
+                else if(s2.equals("language"))
+                    relationship.fieldType = "languages";   // TODO: check this
+
                 relationship.type = RelationshipType.attribute;
             }
         }
@@ -326,6 +373,11 @@ public class Relationship
             }
             else
             {
+                if(s2.equals("id"))
+                    relationship.fieldType = "so_id";
+                else if(s2.equals("timestamp"))
+                    relationship.fieldType = "timestamps";  // TODO: check this
+
                 relationship.type = RelationshipType.attribute;
             }
         }
