@@ -58,7 +58,7 @@ public class TQLTranslator3
 
             observationQuery += "\nFROM Observation AS "+observationVariable.name+ "\n\tINNER JOIN ( ";
             observationQuery += sensorSQL + " ) AS "+observationVariable.sensorVariable.name;
-            observationQuery += " ON ("+observationVariable.name+".sen_id = "+observationVariable.sensorVariable.name+".sen_id)";
+            observationQuery += " ON ("+observationVariable.name+".id = "+observationVariable.sensorVariable.name+".id)";
 
             return observationQuery;
         }
@@ -73,19 +73,22 @@ public class TQLTranslator3
 
         // parse the "WHERE" clause first. this is to determine the joins needed in the "FROM"
         String whereCondition = translateWhere(sqlQuery, collectionsJoinMap);
+        String builder = "";
 
         for(int i = 0; i < sqlQuery.attributesList.size(); i++)
         {
             // if the last attribute, don't put a comma
             if(i == sqlQuery.attributesList.size()-1)
             {
-                translatedQuery += sqlQuery.attributesList.get(i);
+                builder += sqlQuery.attributesList.get(i);
             }
             else
             {
-                translatedQuery += sqlQuery.attributesList.get(i)+",";
+                builder += sqlQuery.attributesList.get(i)+",";
             }
         }
+
+        translatedQuery += Relationship.replaceAttributeNames(builder);
 
         translatedQuery += "\nFROM ";
 
@@ -130,6 +133,8 @@ public class TQLTranslator3
         if(sqlQuery.groupby != null)
         {
             sqlQuery.groupby = sqlQuery.groupby.trim();
+            sqlQuery.groupby = Relationship.replaceAttributeNames(sqlQuery.groupby);
+
             if(!sqlQuery.groupby.isEmpty())
             {
                 translatedQuery += "\nGROUP BY "+sqlQuery.groupby;
@@ -141,6 +146,8 @@ public class TQLTranslator3
         if(sqlQuery.having != null)
         {
             sqlQuery.having = sqlQuery.having.trim();
+            sqlQuery.having = Relationship.replaceAttributeNames(sqlQuery.having);
+
             if(!sqlQuery.having.isEmpty())
             {
                 translatedQuery += "\nHAVING "+sqlQuery.groupby;
@@ -256,7 +263,7 @@ public class TQLTranslator3
                 // TODO: dunno about this case. It's weird to have the last attribute as collection
                 // TODO: the assumption is the id of the last collection to be used
                 Relationship r = Relationship.getRelationship(currentJoinInfo.TQLTableType,array[i+1]);
-                qualifiedName += temp.alias+"."+r.joinInformation.get(r.joinInformation.size()-1).column;
+                qualifiedName += temp.alias+"."+r.joinInformation.get(r.joinInformation.size()-1).primaryKey;
             }
 
             currentJoinInfo = temp;
@@ -289,5 +296,4 @@ public class TQLTranslator3
 
         return joins;
     }
-
 }

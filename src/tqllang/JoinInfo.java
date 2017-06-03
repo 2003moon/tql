@@ -67,7 +67,7 @@ public class JoinInfo
                 join = new Join();
                 join.tableName = joinTable.table;
                 join.alias = tempAlias1+"_"+join.tableName;
-                join.condition = tempAlias1+"."+joinTable.column+" = "+join.alias+"."+joinTable.column;
+                join.condition = tempAlias1+"."+joinTable.foreignKey+" = "+join.alias+"."+joinTable.primaryKey;
 
                 joinInfo.joins.add(join);
 

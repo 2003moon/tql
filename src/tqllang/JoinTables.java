@@ -24,7 +24,8 @@ public class JoinTables
                 return;
         }
 
-        JoinTable jTable = new JoinTable(table, alias, column);
+        // TODO: don't use this. This was for translator 1
+        JoinTable jTable = new JoinTable(table, alias, column, column);
         joinTables.add(jTable);
     }
 

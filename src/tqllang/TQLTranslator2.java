@@ -120,7 +120,8 @@ public class TQLTranslator2 {
                         translatedQuery += ","+joinTable.table;
                         addedCollections.add(joinTable.table);
                     }
-                    whereCondition += " and "+collections+"."+joinTable.column+"="+joinTable.table+"."+joinTable.column;
+                    // TODO: fix this
+//                    whereCondition += " and "+collections+"."+joinTable.column+"="+joinTable.table+"."+joinTable.column;
                 }
             }
 
@@ -257,11 +258,11 @@ public class TQLTranslator2 {
                         if(TempMap.containsKey(key)){
                             key=TempMap.get(key);
                         }
-                        collectionsJoinMap.get(key).addJoinTable(jT.table,qualifiedName,jT.column);
+//                        collectionsJoinMap.get(key).addJoinTable(jT.table,qualifiedName,jT.column); // TODO: fix this
                     }else{
                          JoinTable last_jT=relationship.joinInformation.get(j-1);
                          collectionsJoinMap.put(last_jT.table,new JoinTables());
-                         collectionsJoinMap.get(last_jT.table).addJoinTable(jT.table,qualifiedName,jT.column);
+//                         collectionsJoinMap.get(last_jT.table).addJoinTable(jT.table,qualifiedName,jT.column); // TODO: fix this
                     }
 
                     //firstCollectionAlias

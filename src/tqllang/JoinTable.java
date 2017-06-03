@@ -8,12 +8,14 @@ public class JoinTable
 {
     public String table;
     public String alias;
-    public String column;
+    public String primaryKey;
+    public String foreignKey;
 
-    public JoinTable(String table, String alias, String column)
+    public JoinTable(String table, String alias, String primaryKey, String foreignKey)
     {
         this.table = table;
         this.alias = alias;
-        this.column = column;
+        this.primaryKey = primaryKey;
+        this.foreignKey = foreignKey;
     }
 }

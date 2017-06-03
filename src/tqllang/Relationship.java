@@ -29,32 +29,32 @@ public class Relationship
             {
                 relationship.fieldType = "Location";
                 relationship.type = RelationshipType.join;
-                relationship.joinInformation.add(new JoinTable("Location","","loc_id"));
+                relationship.joinInformation.add(new JoinTable("Location","","id", "loc_id"));
             }
             else if(s2.equals("type"))
             {
                 relationship.fieldType = "SensorType";
                 relationship.type = RelationshipType.join;
-                relationship.joinInformation.add(new JoinTable("SensorType","","sen_type_id"));
+                relationship.joinInformation.add(new JoinTable("SensorType","","id", "sen_type_id"));
             }
             else if(s2.equals("platform"))
             {
                 relationship.fieldType = "Platform";
                 relationship.type = RelationshipType.join;
-                relationship.joinInformation.add(new JoinTable("Platform","","pltfm_id"));
+                relationship.joinInformation.add(new JoinTable("Platform","","id", "pltfm_id"));
             }
             else if(s2.equals("user"))
             {
                 relationship.fieldType = "User";
                 relationship.type = RelationshipType.join;
-                relationship.joinInformation.add(new JoinTable("Users","","user_id"));
+                relationship.joinInformation.add(new JoinTable("Users","","id","user_id"));
             }
             else if(s2.equals("coverageRooms"))
             {
                 relationship.fieldType = "Infrastructure";
                 relationship.type = RelationshipType.join;
-                relationship.joinInformation.add(new JoinTable("Sen_Infr","","sen_id"));
-                relationship.joinInformation.add(new JoinTable("Infrastructure","","infr_id"));
+                relationship.joinInformation.add(new JoinTable("Sen_Infr","","sen_id", "id"));
+                relationship.joinInformation.add(new JoinTable("Infrastructure","","id", "infr_id"));
             }
             else if(!s2.equals("id") && !s2.equals("description") && !s2.equals("name") && !s2.equals("mac") && !s2.equals("IP") && !s2.equals("port"))
             {
@@ -62,9 +62,9 @@ public class Relationship
             }
             else
             {
-                if(s2.equals("id"))
-                    relationship.fieldType = "sen_id";
-                else if(s2.equals("IP"))
+//                if(s2.equals("id"))
+//                    relationship.fieldType = "sen_id";
+                if(s2.equals("IP"))
                     relationship.fieldType = "ip";
 
                 relationship.type = RelationshipType.attribute;
@@ -76,13 +76,13 @@ public class Relationship
             {
                 relationship.fieldType = "Sensor";
                 relationship.type = RelationshipType.join;
-                relationship.joinInformation.add(new JoinTable("Sensor","","sen_id"));
+                relationship.joinInformation.add(new JoinTable("Sensor","","id", "sen_id"));
             }
             else if(s2.equals("type"))
             {
                 relationship.fieldType = "ObservationType";
                 relationship.type = RelationshipType.join;
-                relationship.joinInformation.add(new JoinTable("ObservationType","","obs_type_id"));
+                relationship.joinInformation.add(new JoinTable("ObservationType","","id", "obs_type_id"));
             }
             else if(s2.equals("payload"))
             {
@@ -94,9 +94,9 @@ public class Relationship
             }
             else
             {
-                if(s2.equals("id"))
-                    relationship.fieldType = "obs_id";
-                else if(s2.equals("timestamp"))
+//                if(s2.equals("id"))
+//                    relationship.fieldType = "obs_id";
+                if(s2.equals("timestamp"))
                     relationship.fieldType = "timestamps";  // TODO: check this
 
                 relationship.type = RelationshipType.attribute;
@@ -109,8 +109,8 @@ public class Relationship
                 throwUnrecognizedException(s2);
             }
 
-            if(s2.equals("id"))
-                relationship.fieldType = "group_id";
+//            if(s2.equals("id"))
+//                relationship.fieldType = "group_id";
 
             relationship.type = RelationshipType.attribute;
         }
@@ -120,8 +120,8 @@ public class Relationship
             {
                 relationship.fieldType = "Group";
                 relationship.type = RelationshipType.join;
-                relationship.joinInformation.add(new JoinTable("Grp_Usr","","user_id"));
-                relationship.joinInformation.add(new JoinTable("Groups","","group_id"));
+                relationship.joinInformation.add(new JoinTable("Grp_Usr","","user_id", "id"));
+                relationship.joinInformation.add(new JoinTable("Groups","","id","group_id"));
             }
             else if(!s2.equals("email") && !s2.equals("name"))
             {
@@ -147,8 +147,8 @@ public class Relationship
             {
                 relationship.fieldType = "Location";
                 relationship.type = RelationshipType.join;
-                relationship.joinInformation.add(new JoinTable("Reg_Loc","","reg_id"));
-                relationship.joinInformation.add(new JoinTable("Location","","loc_id"));
+                relationship.joinInformation.add(new JoinTable("Reg_Loc","","reg_id", "id"));
+                relationship.joinInformation.add(new JoinTable("Location","","loc_id", "id"));
             }
             else if(!s2.equals("id") && !s2.equals("name") && !s2.equals("floor"))
             {
@@ -156,9 +156,9 @@ public class Relationship
             }
             else
             {
-                if(s2.equals("id"))
-                    relationship.fieldType = "reg_id";
-                else if(s2.equals("floor"))
+//                if(s2.equals("id"))
+//                    relationship.fieldType = "reg_id";
+                if(s2.equals("floor"))
                     relationship.fieldType = "floors";  // TODO: check this
 
                 relationship.type = RelationshipType.attribute;
@@ -171,8 +171,8 @@ public class Relationship
                 throwUnrecognizedException(s2);
             }
 
-            if(s2.equals("id"))
-                relationship.fieldType = "infr_type_id";
+//            if(s2.equals("id"))
+//                relationship.fieldType = "infr_type_id";
 
             relationship.type = RelationshipType.attribute;
         }
@@ -182,13 +182,13 @@ public class Relationship
             {
                 relationship.fieldType = "InfrastructureType";
                 relationship.type = RelationshipType.join;
-                relationship.joinInformation.add(new JoinTable("InfrastructureType","","infr_type_id"));
+                relationship.joinInformation.add(new JoinTable("InfrastructureType","","id", "infr_type_id"));
             }
             else if(s2.equals("region"))
             {
                 relationship.fieldType = "Region";
                 relationship.type = RelationshipType.join;
-                relationship.joinInformation.add(new JoinTable("Region","","reg_id"));
+                relationship.joinInformation.add(new JoinTable("Region","","id", "reg_id"));
             }
             else if(!s2.equals("id") && !s2.equals("name"))
             {
@@ -196,8 +196,8 @@ public class Relationship
             }
             else
             {
-                if(s2.equals("id"))
-                    relationship.fieldType = "infr_id";
+//                if(s2.equals("id"))
+//                    relationship.fieldType = "infr_id";
 
                 relationship.type = RelationshipType.attribute;
             }
@@ -209,8 +209,8 @@ public class Relationship
                 throwUnrecognizedException(s2);
             }
 
-            if(s2.equals("id"))
-                relationship.fieldType = "pltfm_type_id";
+//            if(s2.equals("id"))
+//                relationship.fieldType = "pltfm_type_id";
 
             relationship.type = RelationshipType.attribute;
         }
@@ -220,19 +220,19 @@ public class Relationship
             {
                 relationship.fieldType = "PlatformType";
                 relationship.type = RelationshipType.join;
-                relationship.joinInformation.add(new JoinTable("PlatformType","","pltfm_type_id"));
+                relationship.joinInformation.add(new JoinTable("PlatformType","","id","pltfm_type_id"));
             }
             else if(s2.equals("location"))
             {
                 relationship.fieldType = "Location";
                 relationship.type = RelationshipType.join;
-                relationship.joinInformation.add(new JoinTable("Location","","loc_id"));
+                relationship.joinInformation.add(new JoinTable("Location","","id","loc_id"));
             }
             else if(s2.equals("owner"))
             {
                 relationship.fieldType = "User";
                 relationship.type = RelationshipType.join;
-                relationship.joinInformation.add(new JoinTable("Users","","user_id"));
+                relationship.joinInformation.add(new JoinTable("Users","","id", "user_id"));
             }
             else if(!s2.equals("id") && !s2.equals("name") && !s2.equals("description"))
             {
@@ -240,8 +240,8 @@ public class Relationship
             }
             else
             {
-                if(s2.equals("id"))
-                    relationship.fieldType = "pltfm_id";
+//                if(s2.equals("id"))
+//                    relationship.fieldType = "pltfm_id";
 
                 relationship.type = RelationshipType.attribute;
             }
@@ -258,8 +258,8 @@ public class Relationship
             }
             else
             {
-                if(s2.equals("id"))
-                    relationship.fieldType = "sen_type_id";
+//                if(s2.equals("id"))
+//                    relationship.fieldType = "sen_type_id";
 
                 relationship.type = RelationshipType.attribute;
             }
@@ -277,8 +277,8 @@ public class Relationship
             }
             else
             {
-                if(s2.equals("id"))
-                    relationship.fieldType = "obs_type_id";
+//                if(s2.equals("id"))
+//                    relationship.fieldType = "obs_type_id";
 
                 relationship.type = RelationshipType.attribute;
             }
@@ -295,8 +295,8 @@ public class Relationship
             }
             else
             {
-                if(s2.equals("id"))
-                    relationship.fieldType = "so_type_id";
+//                if(s2.equals("id"))
+//                    relationship.fieldType = "so_type_id";
 
                 relationship.type = RelationshipType.attribute;
             }
@@ -307,13 +307,13 @@ public class Relationship
             {
                 relationship.fieldType = "ObservationType";
                 relationship.type = RelationshipType.join;
-                relationship.joinInformation.add(new JoinTable("ObservationType","","obs_type_id"));
+                relationship.joinInformation.add(new JoinTable("ObservationType","","id","obs_type_id"));
             }
             else if(s2.equals("semanticObservationType"))
             {
                 relationship.fieldType = "SemanticObservationType";
                 relationship.type = RelationshipType.join;
-                relationship.joinInformation.add(new JoinTable("SemanticObservationType","","so_type_id"));
+                relationship.joinInformation.add(new JoinTable("SemanticObservationType","","id","so_type_id"));
             }
             else if(!s2.equals("id") && !s2.equals("name") && !s2.equals("description"))
             {
@@ -321,8 +321,8 @@ public class Relationship
             }
             else
             {
-                if(s2.equals("id"))
-                    relationship.fieldType = "vs_type_id";
+//                if(s2.equals("id"))
+//                    relationship.fieldType = "vs_type_id";
 
                 relationship.type = RelationshipType.attribute;
             }
@@ -333,7 +333,7 @@ public class Relationship
             {
                 relationship.fieldType = "VirtualSensorType";
                 relationship.type = RelationshipType.join;
-                relationship.joinInformation.add(new JoinTable("VirtualSensorType","","vs_type_id"));
+                relationship.joinInformation.add(new JoinTable("VirtualSensorType","","id","vs_type_id"));
             }
             else if(!s2.equals("id") && !s2.equals("name") && !s2.equals("description") && !s2.equals("sourceFileLocation") && !s2.equals("compiledCodeLocation") && !s2.equals("language") && !s2.equals("projectName"))
             {
@@ -341,9 +341,9 @@ public class Relationship
             }
             else
             {
-                if(s2.equals("id"))
-                    relationship.fieldType = "vs_id";
-                else if(s2.equals("language"))
+//                if(s2.equals("id"))
+//                    relationship.fieldType = "vs_id";
+                if(s2.equals("language"))
                     relationship.fieldType = "languages";   // TODO: check this
 
                 relationship.type = RelationshipType.attribute;
@@ -355,13 +355,13 @@ public class Relationship
             {
                 relationship.fieldType = "VirtualSensor";
                 relationship.type = RelationshipType.join;
-                relationship.joinInformation.add(new JoinTable("VirtualSensor","","vs_id"));
+                relationship.joinInformation.add(new JoinTable("VirtualSensor","", "id","vs_id"));
             }
             else if(s2.equals("type"))
             {
                 relationship.fieldType = "SemanticObservationType";
                 relationship.type = RelationshipType.join;
-                relationship.joinInformation.add(new JoinTable("SemanticObservationType","","so_type_id"));
+                relationship.joinInformation.add(new JoinTable("SemanticObservationType","","id","so_type_id"));
             }
             else if(s2.equals("payload"))
             {
@@ -373,9 +373,9 @@ public class Relationship
             }
             else
             {
-                if(s2.equals("id"))
-                    relationship.fieldType = "so_id";
-                else if(s2.equals("timestamp"))
+//                if(s2.equals("id"))
+//                    relationship.fieldType = "so_id";
+                if(s2.equals("timestamp"))
                     relationship.fieldType = "timestamps";  // TODO: check this
 
                 relationship.type = RelationshipType.attribute;
@@ -387,6 +387,16 @@ public class Relationship
         }
 
         return relationship;
+    }
+
+    public static String replaceAttributeNames(String initialString)
+    {
+        String builder = initialString.replace("IP","ip");
+        builder = builder.replace("timestamp", "timestamps");
+        builder = builder.replace("floor", "floors");
+        builder = builder.replace("language", "languages");
+
+        return builder;
     }
 
     private static void throwUnrecognizedException(String attribute) throws TQLException

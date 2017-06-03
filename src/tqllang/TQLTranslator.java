@@ -111,7 +111,7 @@ public class TQLTranslator
             {
                 for(JoinTable joinTable : collectionsJoinMap.get(collection.alias).joinTables)
                 {
-                    translatedQuery += " INNER JOIN "+joinTable.table+" AS "+joinTable.alias+" USING ("+joinTable.column+")";
+                    translatedQuery += " INNER JOIN "+joinTable.table+" AS "+joinTable.alias+" USING ("+joinTable.primaryKey+")";
                 }
             }
 
@@ -196,11 +196,11 @@ public class TQLTranslator
             // the first one and last one need to be dealt with differently
             if(i == 0)
             {
-                relationship = getRelationship(firstCollectionName,array[1]);
+                relationship = Relationship.getRelationship(firstCollectionName,array[1]);
             }
             else
             {
-                relationship = getRelationship(array[i],array[i+1]);
+                relationship = Relationship.getRelationship(array[i],array[i+1]);
             }
 
             if(relationship.type == RelationshipType.join)
@@ -212,7 +212,7 @@ public class TQLTranslator
                 for(JoinTable jT : relationship.joinInformation)
                 {
                     qualifiedName += "_"+jT.table;
-                    collectionsJoinMap.get(firstCollectionAlias).addJoinTable(jT.table,qualifiedName,jT.column);
+                    collectionsJoinMap.get(firstCollectionAlias).addJoinTable(jT.table,qualifiedName,jT.primaryKey);
                 }
             }
             else if(relationship.type == RelationshipType.attribute)
@@ -232,6 +232,7 @@ public class TQLTranslator
         return qualifiedName;
     }
 
+    /*
     public Relationship getRelationship(String s1, String s2)
     {
         Relationship relationship = new Relationship();
@@ -498,6 +499,6 @@ public class TQLTranslator
         }
 
         return relationship;
-    }
+    }*/
 
 }
