@@ -13,7 +13,7 @@ public class Main
 
         try
         {
-            Scanner input = new Scanner(new FileInputStream("example3"));
+            Scanner input = new Scanner(new FileInputStream("example9"));
 
             while(input.hasNextLine())
             {
@@ -22,12 +22,15 @@ public class Main
 
             TQLParser tqlParser = new TQLParser(query);
             //TQLTranslator translator = new TQLTranslator();
-            TQLTranslator3 translator = new TQLTranslator3();
+            TQLTranslator2 translator = new TQLTranslator2();
 
             try
             {
                 tqlParser.parse();
                 System.out.println(translator.translate(tqlParser.tqlQuery));
+                DoQuery dq= new DoQuery();
+                dq.Query(translator.translate(tqlParser.tqlQuery));
+                dq.getResult();
             }
             catch(TQLException e)
             {

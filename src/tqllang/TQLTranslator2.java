@@ -25,7 +25,8 @@ public class TQLTranslator2 {
         // translate each collection variables
         for(CollectionVariable collectionVariable : tqlQuery.collectionVariables.values())
         {
-            translatedQueries.put(collectionVariable.name, translateCollection(collectionVariable));
+            if(collectionVariable.isAssigned)
+                translatedQueries.put(collectionVariable.name, translateCollection(collectionVariable));
         }
 
         String finalSQL = translateSQL(tqlQuery.finalQuery);
@@ -132,26 +133,29 @@ public class TQLTranslator2 {
         // "where" clause
         if(!whereCondition.isEmpty())
             translatedQuery += " WHERE "+whereCondition;
+
         //"Group" clause
         if(sqlQuery.groupby != null)
         {
             sqlQuery.groupby = sqlQuery.groupby.trim();
             if(!sqlQuery.groupby.isEmpty())
             {
-                translatedQuery += "\nGROUP BY "+sqlQuery.groupby;
+                String[] array =sqlQuery.groupby .split("\\.");
+                translatedQuery += "\nGROUP BY "+array[0]+"."+"obs_id";
+                // "HAVING"
+                if(sqlQuery.having != null)
+                {
+                    sqlQuery.having = sqlQuery.having.trim();
+                    if(!sqlQuery.having.isEmpty())
+                    {
+                        translatedQuery += "\nHAVING "+array[0]+"."+"obs_id";
+                    }
+                }
             }
         }
 
 
-        // "HAVING"
-        if(sqlQuery.having != null)
-        {
-            sqlQuery.having = sqlQuery.having.trim();
-            if(!sqlQuery.having.isEmpty())
-            {
-                translatedQuery += "\nHAVING "+sqlQuery.groupby;
-            }
-        }
+
 
         return translatedQuery;
     }
@@ -265,7 +269,7 @@ public class TQLTranslator2 {
             }
             else if(relationship.type == RelationshipType.attribute)
             {
-                qualifiedName += "."+array[i+1];
+                qualifiedName += "."+relationship.fieldType;
             }
             else if(relationship.type == RelationshipType.json)
             {
