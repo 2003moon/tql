@@ -13,7 +13,7 @@ public class Main
 
         try
         {
-            Scanner input = new Scanner(new FileInputStream("example9"));
+            Scanner input = new Scanner(new FileInputStream("example8"));
 
             while(input.hasNextLine())
             {
@@ -21,8 +21,8 @@ public class Main
             }
 
             TQLParser tqlParser = new TQLParser(query);
-            //TQLTranslator translator = new TQLTranslator();
             TQLTranslator2 translator = new TQLTranslator2();
+           // TQLTranslator3 translator = new TQLTranslator3();
 
             try
             {

@@ -58,7 +58,7 @@ public class TQLTranslator3
 
             observationQuery += "\nFROM Observation AS "+observationVariable.name+ "\n\tINNER JOIN ( ";
             observationQuery += sensorSQL + " ) AS "+observationVariable.sensorVariable.name;
-            observationQuery += " ON ("+observationVariable.name+".id = "+observationVariable.sensorVariable.name+".id)";
+            observationQuery += " ON ("+observationVariable.name+".sen_id = "+observationVariable.sensorVariable.name+".id)";
 
             return observationQuery;
         }

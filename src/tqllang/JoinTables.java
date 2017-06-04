@@ -15,7 +15,7 @@ public class JoinTables
         joinTables = new ArrayList<>();
     }
 
-    public void addJoinTable(String table, String alias, String column)
+    public void addJoinTable(String table, String alias, String primarykey,String foreignkey)
     {
         // check if the table already exists
         for(JoinTable joinTable : joinTables)
@@ -25,7 +25,7 @@ public class JoinTables
         }
 
         // TODO: don't use this. This was for translator 1
-        JoinTable jTable = new JoinTable(table, alias, column, column);
+        JoinTable jTable = new JoinTable(table, alias, primarykey, foreignkey);
         joinTables.add(jTable);
     }
 

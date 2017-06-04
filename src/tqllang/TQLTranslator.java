@@ -212,7 +212,7 @@ public class TQLTranslator
                 for(JoinTable jT : relationship.joinInformation)
                 {
                     qualifiedName += "_"+jT.table;
-                    collectionsJoinMap.get(firstCollectionAlias).addJoinTable(jT.table,qualifiedName,jT.primaryKey);
+                    collectionsJoinMap.get(firstCollectionAlias).addJoinTable(jT.table,qualifiedName,jT.primaryKey,jT.foreignKey);
                 }
             }
             else if(relationship.type == RelationshipType.attribute)

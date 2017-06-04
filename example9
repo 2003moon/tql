@@ -2,11 +2,12 @@ DEFINE SensorCollection sensor_collection1;
 
 DEFINE ObservationCollection observation_collection1;
 
-sensor_collection1 = SELECT sen.* FROM Sensor sen where sen.platform.location.x=12;
+sensor_collection1 = SELECT sen.* FROM Sensor sen where sen.type.id='s1';
 
 observation_collection1 = SENSORS_TO_OBSERVATIONS(sensor_collection1);
 
-SELECT obs.*
-FROM observation_collection1 obs
-WHERE obs.payload.platformId = 22;
+SELECT count(*)
+FROM observation_collection1 obs;
+
+
 

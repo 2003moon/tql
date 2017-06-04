@@ -29,11 +29,15 @@ public class DoQuery {
           if(res!=null){
               JSONObject observation=new JSONObject();
               while(res.next()){
-                  observation.put("obs_id",res.getString(1));
-                  observation.put("sen_id",res.getString(2));
-                  observation.put("timestamp",res.getString(3));
-                  observation.put("payload",res.getObject(4));
-                  observation.put("type",res.getString(5));
+                try{
+                    observation.put("obs_id",res.getString(1));
+                    observation.put("sen_id",res.getString(2));
+                    observation.put("timestamp",res.getString(3));
+                    observation.put("payload",res.getObject(4));
+                    observation.put("type",res.getString(5));
+                }catch (Exception e){
+                    observation.put("count",res.getInt(1));
+                }
                   System.out.println(observation);
               }
 

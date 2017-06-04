@@ -5,7 +5,7 @@ DEFINE ObservationCollection observation_collection1;
 sensor_collection1 =
 SELECT sen.*
 FROM Sensor sen
-WHERE sen.type.id = "WiFi";
+WHERE sen.type.name = "WiFi";
 
 observation_collection1 = SENSORS_TO_OBSERVATIONS(sensor_collection1);
 
