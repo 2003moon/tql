@@ -30,7 +30,7 @@ public class TQLTranslator3
         String finalSQL = translateSQL(tqlQuery.finalQuery);
 
         finalSQL += ";";
-
+        System.out.println("Done translating");
         return finalSQL;
     }
 

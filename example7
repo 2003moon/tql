@@ -8,4 +8,4 @@ observation_collection1 = SENSORS_TO_OBSERVATIONS(sensor_collection1);
 
 SELECT obs.*
 FROM observation_collection1 obs
-WHERE obs.type.name = "Some";
+WHERE obs.type.name = "WIFI";

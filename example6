@@ -10,6 +10,6 @@ WHERE sen.user.groups.name = "ISG";
 observation_collection1 = SENSORS_TO_OBSERVATIONS(sensor_collection1);
 
 SELECT obs.*
-FROM observation_collection1 obs
-WHERE obs.payload.platformId = "client1";
+FROM observation_collection1 obs;
+
 
